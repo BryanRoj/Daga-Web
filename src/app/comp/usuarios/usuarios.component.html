@@ -1,0 +1,71 @@
+<h1>USUARIOS</h1>
+<div>
+    <select class="form-select" [(ngModel)]="tipoUsuario">
+        <option value="cliente">Cliente</option>
+        <option value="trabajador">Trabajador</option>
+    </select>
+</div>
+
+<div *ngIf="tipoUsuario === 'cliente'" class="container">
+    <div class="row">
+        <div class="col-12 mb-4">
+            Buscar: <input class="form-control" type="text" [(ngModel)]="consultaUsuarios" />
+        </div>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>NOMBRE</th>
+                    <th>DNI</th>
+                    <th>DIRECCIÓN</th>
+                    <th>DISTRITO</th>
+                    <th>TELÉFONO</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let c of cliente">
+                    <td>{{c.id_Cliente}}</td>
+<!--                    <td>{{c.nombre_Cliente}}</td>-->
+<!--                    <td>{{c.d_identidad_Cliente}}</td>-->
+<!--                    <td>{{c.direccion_Cliente}}</td>-->
+<!--                    <td>{{c.distrito_Cliente}}</td>-->
+<!--                    <td>{{c.telf_Cliente}}</td>-->
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div *ngIf="tipoUsuario === 'trabajador'" class="container">
+    <div class="row">
+        <div class="col-12 mb-4">
+            Buscar: <input class="form-control" type="text" [(ngModel)]="consultaUsuarios" />
+        </div>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>DNI</th>
+                    <th>NOMBRE</th>
+                    <th>APELLIDOS</th>
+                    <th>EMAIL</th>
+                    <th>DISTRITO</th>
+                    <th>TELEFONO</th>
+                    <th>CARGO</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let t of trabajador">
+                    <td>{{t.id_Trabajador}}</td>
+                    <td>{{t.dni_Trabajador}}</td>
+                    <td>{{t.datosGenerales.nombre}}</td>
+                    <td>{{t.datosGenerales.apellidos}}</td>
+                    <td>{{t.datosGenerales.email}}</td>
+                    <td>{{t.datosGenerales.distrito}}</td>
+                    <td>{{t.datosGenerales.telefono}}</td>
+                    <td>{{t.cargo.tipoCargo}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

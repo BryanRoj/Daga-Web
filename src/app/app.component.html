@@ -1,0 +1,48 @@
+<!-------------------------- ENCABEZADO -------------------------->
+<header>
+  <div class="container-fluid text-right" style="background-color: #cdd6e5;">
+    <a href="#" target="_blank" style="text-decoration: none;"><i class="fab fa-facebook fa-lg" style="color: #1e2229;"></i><strong class="text-dark"> Facebook </strong></a>
+    <a href="#" target="_blank" style="text-decoration: none;"><i class="fab fa-whatsapp fa-lg" style="color: #1e2229;"></i><strong class="text-dark"> Whatsapp </strong></a>
+    <a href="#" target="_blank" style="text-decoration: none;"><i class="far fa-envelope fa-lg" style="color: #1e2229;"></i><strong class="text-dark"> info@dagasoluciones.com </strong></a>
+  </div>  
+  <app-navegador *ngIf="mostrarMenuAdministrador"></app-navegador> <!-- Mostrar el menú principal -->
+  <app-navegador-administrador *ngIf="!mostrarMenuAdministrador"></app-navegador-administrador> <!-- Mostrar el menú de administrador -->
+</header>
+<!---------------------------- CUERPO ---------------------------->
+<body class="container-fluid mt-3 mb-3">
+  <router-outlet></router-outlet>
+</body>
+<!------------------------- PIE DE PAGINA------------------------->
+<footer class="container-fluid text-light d-flex justify-content-center align-items-center" style="background-color: #000;">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 col-md-4">
+        <figure>
+          <a routerLink="inicio">
+            <img class="img-fluid mt-4" src="assets/img/logo_daga_pie.png" alt="Logo">
+          </a>
+        </figure>
+      </div>
+      <div class="col-12 col-md-4">
+        <h2>Contactos:</h2>
+        <small>
+          <img class="img-fluid" src="assets/img/icono1.png" alt="ubicacion"> Mz.11 Lte. 04 - Bayovar San Juan de Lurigancho - Lima 36
+        </small>
+        <small>
+          <p class="mt-3"><img class="img-fluid" src="assets/img/icono2.png" alt="ubicacion"> Cel: 998-027-777 </p>
+        </small>
+        <small>
+          <img class="img-fluid" src="assets/img/icono3.png" alt="ubicacion"> ventas@dagasoluciones.com - info@dagasoluciones.com
+        </small>
+      </div>
+      <div class="col-12 col-md-4">
+        <h3>Video:</h3>
+        <video class="img-fluid" controls>
+          <source src="assets/video/disargesa.mp4" type="video/mp4">
+          Tu navegador no admite el elemento de video.
+        </video>
+        <small>&copy;{{fecha}} <b>Daga Soluciones Tecnicas</b> - Todos los Derechos Reservados.</small>
+      </div>
+    </div>
+  </div>
+</footer>

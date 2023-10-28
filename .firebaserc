@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "daga-soluciones": {
+      "hosting": {
+        "WebT1-app": [
+          "daga-soluciones"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "daga-soluciones"
+  }
+}

@@ -1,0 +1,244 @@
+<h1>MODIFICAR</h1>
+<h3>¿Qué desea modificar?</h3>
+<div>
+    <select class="form-select" [(ngModel)]="tipoModificacion">
+        <option value="modProd">Producto</option>
+        <option value="modUser">Usuario</option>
+    </select>
+</div>
+
+<div *ngIf="tipoModificacion === 'modProd'">
+    <div class="row">
+        <div class="col-12">
+            <h2 class="text-center text-primary mt-4">Gestor de Productos</h2>
+            <p>Total: {{productos.length}}</p>
+            <table class="table table-hover">
+                <thead>
+                    <th>ID</th>
+                    <th>CODIGO DE PRODUCTO</th>
+                    <th>NOMBRE</th>
+                    <th>CARACTERISTICAS</th>
+                    <th>LARGO</th>
+                    <th>ANCHO</th>
+                    <th>ALTO</th>
+                    <th>STOCK</th>
+                    <th>PRECIO</th>
+                    <th>CATEGORIA</th>
+                    <th colspan="2">ACCIONES</th>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let p of productos">
+                        <td>{{p.id}}</td>
+                        <td>{{p.codigo_producto}}</td>
+                        <td>{{p.nombre | uppercase}}</td>
+                        <!-- Pipes: siempre se colocan luego de una barra vertical | -->
+                        <td>{{p.caracteristicas}}</td>
+                        <td>{{p.largo}}</td>
+                        <td>{{p.ancho}}</td>
+                        <td>{{p.alto}}</td>
+                        <td>{{p.stock}}</td>
+                        <td>{{p.precio | currency:'S/'}}</td>
+                        <td>{{p.categoria_id}}</td>
+                        <td>
+                            <button class="btn btn-warning btn-sm" (click)="editarProducto(p)">
+                                Editar
+                            </button>
+                        </td>
+                        <td>
+                            <button class="btn btn-danger btn-sm" (click)="eliminarProducto(p)">
+                                Eliminar
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-12">
+            <h2 class="text-center">Formulario - {{textoFormProducto}}</h2>
+            <form [formGroup]="formProductos" (ngSubmit)="registrarProducto()">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label class="label">Codigo de Producto</label>
+                            <input class="form-control" type="text" formControlName="codigo_producto" />
+                        </div>
+                        <div class="form-group">
+                            <label class="label">Nombre</label>
+                            <input class="form-control" type="text" formControlName="nombre" />
+                        </div>
+                        <div class="form-group">
+                            <label class="label">Caracteristicas</label>
+                            <input class="form-control" type="text" formControlName="caracteristicas" />
+                        </div>
+                        <div class="form-group">
+                            <label class="label">Largo</label>
+                            <input class="form-control" type="text" formControlName="largo" />
+                        </div>
+                        <div class="form-group">
+                            <label class="label">Ancho</label>
+                            <input class="form-control" type="text" formControlName="ancho" />
+                        </div>
+                        <div class="form-group">
+                            <label class="label">Alto</label>
+                            <input class="form-control" type="text" formControlName="alto" />
+                        </div>
+                        <div class="form-group">
+                            <label class="label">Stock</label>
+                            <input class="form-control" type="text" formControlName="stock" />
+                        </div>
+                        <div class="form-group">
+                            <label class="label">Precio</label>
+                            <input class="form-control" type="text" formControlName="precio" />
+                        </div>
+                        <div class="form-group">
+                            <label class="label">Categoria</label>
+                            <input class="form-control" type="text" formControlName="categoria_id" />
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group text-center">
+                            <!-- Agrega la clase "text-center" para centrar el contenido -->
+                            <label class="label h2">Imagen del producto</label>
+                            <div class="profile-image">
+                                <div class="image-container">
+                                    <img [src]="selectedImage ? selectedImage : 'assets/img/producto.png'" alt="Imagen de perfil" [style.width.px]="300" [style.height.px]="300"/>
+                                </div>
+                                <div class="upload-container mt-5">
+                                    <input type="file" accept="image/*" (change)="onImageSelected($event)" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <p class="text-center mt-3">
+                    <button class="btn btn-success">{{textoFormProducto}}</button>
+                </p>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!------------------------------------------------------------------------------------>
+<div *ngIf="tipoModificacion === 'modUser'">
+    <div class="row">
+        <div class="col-12">
+            <h2 class="text-center text-primary mt-4">Gestor de Cuentas</h2>
+            <p>Total: {{usuarios.length}}</p>
+            <table class="table table-hover">
+                <thead>
+                    <th>ID</th>
+                    <th>USUARIOS</th>
+                    <th>CONTRASEÑA</th>
+                    <th>NOMBRE</th>
+                    <th>APELLIDO</th>
+                    <th>DNI</th>
+                    <th>EDAD</th>
+                    <th>FECHA NACIMIENTO</th>
+                    <th>CORREO</th>
+                    <th>TELEFONO</th>
+                    <th>TIPO DE USUARIO</th>
+                    <th colspan="2">ACCIONES</th>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let u of usuarios">
+                        <td>{{u.id}}</td>
+                        <td>{{u.usuario}}</td>
+                        <td>{{u.contrasena}}</td>
+                        <td>{{u.nombre}}</td>
+                        <td>{{u.apellido}}</td>
+                        <td>{{u.dni}}</td>
+                        <td>{{u.edad}}</td>
+                        <td>{{u.fecha_nacimiento}}</td>
+                        <td>{{u.correo}}</td>
+                        <td>{{u.telefono}}</td>
+                        <td>{{u.tipo_usuario}}</td>
+                        <td>
+                            <button class="btn btn-warning btn-sm" (click)="editarUser(u)">
+                                Editar
+                            </button>
+                        </td>
+                        <td>
+                            <button class="btn btn-danger btn-sm" (click)="eliminarUser(u)">
+                                Eliminar
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-12">
+            <h2 class="text-center">Formulario - {{textoFormUser}}</h2>
+            <form [formGroup]="formUsuarios" (ngSubmit)="registrarUser()">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label class="label">Nombre</label>
+                            <input class="form-control" type="text" formControlName="nombre" />
+                        </div>
+                        <div class="form-group">
+                            <label class="label">Apellido</label>
+                            <input class="form-control" type="text" formControlName="apellido" />
+                        </div>
+                        <div class="form-group">
+                            <label class="label">DNI</label>
+                            <input class="form-control" type="text" formControlName="dni" />
+                        </div>
+                        <div class="form-group">
+                            <label class="label">Edad</label>
+                            <input class="form-control" type="number" id="edad" min="0" name="edad" required
+                                formControlName="edad" />
+                        </div>
+                        <div class="form-group">
+                            <label class="label">Fecha Nacimiento</label>
+                            <input class="form-control" type="date" formControlName="fecha_nacimiento" />
+                        </div>
+                        <div class="form-group">
+                            <label class="label">Correo</label>
+                            <input class="form-control" type="email" formControlName="correo" />
+                        </div>
+                        <div class="form-group">
+                            <label class="label">Telefono</label>
+                            <input class="form-control" type="text" formControlName="telefono" />
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group text-center">
+                            <label class="label">Imagen de perfil</label>
+                            <div class="profile-image">
+                                <div class="image-container">
+                                    <img [src]="selectedImage ? selectedImage : 'assets/img/usuario.png'"
+                                        alt="Imagen de perfil" [style.width.px]="200" [style.height.px]="200"
+                                        class="rounded-circle" (click)="fileInput.click()" />
+                                    <input type="file" accept="image/*" (change)="onImageSelected($event)" #fileInput
+                                        style="display: none;" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="label">Usuario</label>
+                            <input class="form-control" type="text" formControlName="usuario" />
+                        </div>
+                        <div class="form-group">
+                            <label class="label">Contraseña</label>
+                            <input class="form-control" type="text" formControlName="contrasena" />
+                        </div>
+                        <p>Tipo de Usuario</p>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" id="tipo_usuario" name="tipo_usuario"
+                                value="administrador" formControlName="tipo_usuario" />
+                            <label class="form-check-label">Administrador</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" id="tipo_usuario" name="tipo_usuario"
+                                value="cliente" formControlName="tipo_usuario" />
+                            <label class="form-check-label">Cliente</label>
+                        </div>
+                    </div>
+                </div>
+                <p class="text-center mt-3">
+                    <button class="btn btn-success">{{textoFormUser}}</button>
+                </p>
+            </form>
+        </div>
+    </div>
+</div>

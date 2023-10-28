@@ -1,0 +1,25 @@
+<div class="container-fluid">
+  <div class="row justify-content-center">
+    <h2 class="text-center text-primary mt-4">Reporte de consultas</h2>
+    <p class="h4 text-center mt-4 mb-3" [class.text-lg-start]="totalConsultas <= 999" [class.text-center]="totalConsultas >= 1000">
+      Total de consultas realizadas: {{ totalConsultas }}
+    </p>    
+    <div class="card text-black col-12 col-sm-6 col-md-4 col-lg-3 mb-3 mx-3 my-3" style="max-width: 18rem;" *ngFor="let u of consultas" [ngClass]="getColorClass()">
+      <div class="card-header h5">
+        <p>N° de la Consulta: {{u.id}}</p> 
+      </div>
+      <div class="card-body">
+        <p class="h5">Nombre: </p>
+        <p class="card-text h6">{{u.nombre}}</p>
+        <p class="card-text h6"><b class="h5">Numero: </b>{{u.numero}}</p>
+        <p class="card-text h5">Correo: </p>
+        <p class="card-text h6">{{u.correo}}</p>
+        <p class="card-text h6"><b class="h5">Edad: </b>{{u.edad}}</p>
+        <p class="card-text h6"><b class="h5">Genero: </b>{{u.genero}}</p>
+      </div>
+      <div class="card-footer">
+        <p class="card-text h6">{{u.comentario}}</p>
+      </div>
+    </div>
+  </div>
+</div>

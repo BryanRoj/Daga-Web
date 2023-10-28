@@ -1,0 +1,66 @@
+<div class="container mt-3">
+  <h1 class="text-center">Formulario de contacto</h1>
+  <div class="row">
+    <div class="col-md-5 col-lg-5">
+      <hr>
+      <iframe class="container-fluid"
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7806.425005850215!2d-76.9970279064209!3d-11.959784100000004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105c54803283327%3A0x51cbde03e4d3cc74!2zRXN0YWNpw7NuIEJhecOzdmFy!5e0!3m2!1ses-419!2spe!4v1688398982445!5m2!1ses-419!2spee"
+        width="100%" height="600" frameborder="0" style="border: 0" allowfullscreen="" loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+    </div>
+    <div class="col-md-6 col-lg-6 offset-md-1 offset-lg-1">
+      <form [formGroup]="formConsultas" (ngSubmit)="registrarConsultas()">
+        <div class="mb-3">
+          <label class="form-label">Nombre</label>
+          <input class="form-control" type="text" formControlName="nombre" />
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Número</label>
+          <input class="form-control" type="number" id="cel" pattern="[0-9]{9}" maxlength="9"
+            placeholder="Ingrese 9 dígitos" name="cel" required formControlName="numero" />
+          <div class="invalid-feedback">Ingrese solo números</div>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Correo</label>
+          <input class="form-control" type="email" id="correo" placeholder="example@example.com" name="correo"
+            required formControlName="correo" />
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Edad</label>
+          <input class="form-control" type="number" id="edad" min="0" name="edad" required formControlName="edad" />
+          <div class="valid-feedback">Valid.</div>
+        </div>
+        <p>Género</p>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" id="generoMasculino" name="genero" value="Masculino"
+            formControlName="genero" />
+          <label class="form-check-label" for="generoMasculino">Masculino</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" id="generoFemenino" name="genero" value="Femenino"
+            formControlName="genero" />
+          <label class="form-check-label" for="generoFemenino">Femenino</label>
+        </div>
+        <div class="mb-3">
+          <label for="exampleFormControlTextarea1" class="form-label">Comentario</label>
+          <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Escribe tu mensaje"
+            name="comentario" formControlName="comentario"></textarea>
+        </div>
+        <div class="mb-3 form-group form-check">
+          <input type="checkbox" class="form-check-input" id="terminos" name="terminos"
+            formControlName="aceptaTerminos" />
+          <label class="form-check-label" for="terminos">Acepto los términos y condiciones</label>
+          <div class="invalid-feedback">Debe aceptar los términos y condiciones para continuar.</div>
+        </div>
+        <p style="text-align: center;">
+          <button class="btn btn-success mx-2" type="submit" [disabled]="envioExitoso">{{textoFormConsultas}}</button>
+          <button class="btn btn-secondary mx-2" type="reset" (click)="limpiarCampos()">Limpiar</button>
+        </p>
+        <div class="alert alert-success text-center" role="alert" *ngIf="envioExitoso">
+          Envío exitoso.
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,54 @@
+<div class="container">
+    <h2>Contrato de Servicio</h2>
+  
+    <div class="form-group row">
+      <label for="numeroContrato" class="col-sm-5 col-form-label">Número de Contrato:</label>
+      <div class="col-sm-7">
+        <input type="text" id="numeroContrato" name="numeroContrato" class="form-control" required>
+      </div>
+    </div>
+  
+    <form>
+      <div class="form-group row">
+        <label for="numeroPresupuesto" class="col-sm-5 col-form-label">Número de Presupuesto:</label>
+        <div class="col-sm-7">
+          <input type="text" id="numeroPresupuesto" name="numeroPresupuesto" class="form-control" required>
+        </div>
+      </div>
+  
+      <div class="form-group row">
+        <label for="fecha" class="col-sm-5 col-form-label">Fecha:</label>
+        <div class="col-sm-7">
+          <input type="text" id="fecha" name="fecha" class="form-control" readonly [value]="fechaActual">
+        </div>
+      </div>
+  
+      <div class="form-group row">
+        <label for="tipoServicio" class="col-sm-5 col-form-label">Tipo de Servicio:</label>
+        <div class="col-sm-7">
+          <input type="text" id="tipoServicio" name="tipoServicio" class="form-control" required>
+        </div>
+      </div>
+  
+      <div class="form-group row">
+        <label for="montoServicio" class="col-sm-5 col-form-label">Monto del Servicio:</label>
+        <div class="col-sm-7">
+          <input type="text" id="montoServicio" name="montoServicio" class="form-control" required>
+        </div>
+      </div>
+  
+      <h4>Clausulas:</h4>
+      <ul class="clausulas">
+        <li>El contratista se compromete a prestar el servicio de acuerdo a los términos acordados.</li>
+        <li>El contratista se compromete a cumplir con los plazos establecidos.</li>
+        <li>El cliente se compromete a proporcionar la información y los recursos necesarios.</li>
+        <li>El cliente se compromete a pagar el monto del servicio en las fechas acordadas.</li>
+      </ul>
+  
+      <div class="text-center">
+        <button type="submit" class="btn btn-primary mt-3  me-4">Guardar Contrato</button>
+        <button type="button" class="btn btn-secondary mt-3 ml-2" (click)="regresar()">Cancelar</button>
+      </div>
+    </form>
+  </div>
+  

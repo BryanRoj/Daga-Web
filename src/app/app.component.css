@@ -1,0 +1,8 @@
+.fondo {
+    background-color: #00000000; /* Reemplaza 'fondo.jpg' con la ruta y nombre de tu imagen de fondo */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+  }
+  

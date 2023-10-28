@@ -1,0 +1,76 @@
+<div class="container mt-3 rounded shadow">
+  <div class="row align-items-stretch">
+    <div class="col mt-3 d-none d-lg-block col-md-5 col-lg-5 col-xl-6 rounded">
+      <img src="assets/img/bgLogin.jpg" style="background-position: center center; width: 650px; height: 570px;" class="rounded" alt="">
+    </div>
+    <div class="col bg-white mt-3">
+      <div class="card shadow">
+        <div class="card-body">
+          <h1 class="text-center">Iniciar sesión</h1>
+          <form [formGroup]="loginForm" (ngSubmit)="login()" class="was-validated">
+            <div class="mb-3 mt-3">
+              <label for="usuario_admin" class="form-label">Usuario:</label>
+              <input type="text" class="form-control" placeholder="Ingrese Usuario" formControlName="usuario_admin" required>
+              <div *ngIf="loginForm.controls['usuario_admin'].invalid && (loginForm.controls['usuario_admin'].dirty)" class="alert alert-danger mt-2 mb-2">
+                <div *ngIf="loginForm.controls['usuario_admin'].hasError('required')">
+                    El correo es obligatorio
+                </div>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="pass_Admin" class="form-label">Contraseña:</label>
+              <div class="input-group">
+                <input type="{{ showPassword ? 'text' : 'password' }}" class="form-control" placeholder="Contraseña" formControlName="pass_Admin" required>
+                <button class="btn btn-outline-secondary" type="button" (click)="showPassword = !showPassword">
+                  <i class="fa" [class.fa-eye]="!showPassword" [class.fa-eye-slash]="showPassword"></i>
+                </button>
+              </div>
+              <div *ngIf="loginForm.controls['pass_Admin'].invalid && (loginForm.controls['pass_Admin'].dirty)" class="alert alert-danger mt-2 mb-2">
+                <div *ngIf="loginForm.controls['pass_Admin'].hasError('required')">
+                    La contraseña es obligatoria
+                </div>
+              </div>
+            </div>
+            <div class="mb-4 form-check">
+              <input type="checkbox" name="connected" class="form-check-input">
+              <label for="connected" class="form-check-label"> Recordar Sesion</label>
+            </div>
+            <div class="d-grid">
+              <button class="btn btn-primary" type="submit" [disabled]="loginForm.invalid">Ingresar</button>
+            </div>
+            <div class="my-3">
+              <span>¿No tienes cuenta? <a href="#">Regístrate</a></span><br>
+              <span><a href="#">Recuperar Contraseña</a></span>
+            </div>
+            <div class="container w-100 my-5">
+              <div class="row">
+                <div class="col">
+                  <button class="btn btn-outline-primary w-100 my-1">
+                    <div class="row align-items-center">
+                      <div class="col-2 d-none d-md-block">
+                        <img src="assets/img/fb.png" width="32" alt="">
+                      </div>
+                      <div class="col-12 col-md-10 text-center">Facebook</div>
+                    </div>
+                  </button>
+                </div>
+                <div class="col">
+                  <button class="btn btn-outline-danger w-100 my-1">
+                    <div class="row align-items-center">
+                      <div class="col-2  d-none d-md-block">
+                        <img src="assets/img/google.png" width="32" alt="">
+                      </div>
+                      <div class="col-12 col-md-10 text-center">Google</div>
+                    </div>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="resultado !== ''" class="alert alert-danger mt-3">{{resultado}}</div>
+  </div>
+  
+</div>
