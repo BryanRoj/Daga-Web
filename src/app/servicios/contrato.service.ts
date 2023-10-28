@@ -2,16 +2,19 @@ import { Injectable } from '@angular/core';
 import { Icontrato } from '../modelo/Icontrato';
 import { map } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { GlobalService } from './globalService';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ContratosService {
-  
-  URL:string = "http://localhost:8080/contratoDaga";
+
+  URL:string = "/contratoDaga";
   apiUrl: any;
 
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient, private globalService:GlobalService) {
+    this.URL = this.globalService.getUrl() + this.URL;
+  }
 //Listado
   getContrato = () => {
     let header = new HttpHeaders().set('Type-content','application/json');

@@ -8,7 +8,7 @@ import { Observable, map } from 'rxjs';
 })
 export class ProductosService {
   
-  URL:string = "http://localhost:8080/productosDisargesa";
+  URL:string = "/productosDisargesa";
   apiUrl: any;
 
   constructor(private http:HttpClient, private httpClient: HttpClient) { }
