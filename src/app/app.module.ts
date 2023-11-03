@@ -29,6 +29,8 @@ import { PresupuestosComponent } from './comp/presupuestos/presupuestos.componen
 import { BoletaComponent } from './comp/boleta/boleta.component';
 import { FacturaComponent } from './comp/factura/factura.component';
 import { ContratoComponent } from './comp/contrato/contrato.component';
+import { RegistroComponent } from './comp/registro/registro.component';
+import { NuevosDatosComponent } from './comp/nuevos-datos/nuevos-datos.component';
 
 
 @NgModule({
@@ -51,7 +53,9 @@ import { ContratoComponent } from './comp/contrato/contrato.component';
     PresupuestosComponent,
     BoletaComponent,
     FacturaComponent,
-    ContratoComponent
+    ContratoComponent,
+    RegistroComponent,
+    NuevosDatosComponent
   ],
   imports: [
     BrowserModule,

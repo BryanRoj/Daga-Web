@@ -4,6 +4,6 @@ import { Icargo } from "src/app/modelo/Icargo";
 export interface Itrabajador {
   id_Trabajador: number;
   dni_Trabajador: string;
-  datos: IdatosGenerales;
+  datosGenerales: IdatosGenerales;
   cargo: Icargo;
 }

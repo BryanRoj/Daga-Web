@@ -14,6 +14,8 @@ import { PresupuestosComponent } from './comp/presupuestos/presupuestos.componen
 import { BoletaComponent } from './comp/boleta/boleta.component';
 import { FacturaComponent } from './comp/factura/factura.component';
 import { ContratoComponent } from './comp/contrato/contrato.component';
+import { RegistroComponent } from './comp/registro/registro.component';
+import { NuevosDatosComponent } from './comp/nuevos-datos/nuevos-datos.component';
 
 const routes: Routes = [
   {path:"inicio",component:InicioComponent},
@@ -29,7 +31,10 @@ const routes: Routes = [
   {path: "presupuestos",component:PresupuestosComponent},
   {path: "boleta",component:BoletaComponent},
   {path: "factura",component:FacturaComponent},
-  {path: "contrato",component:ContratoComponent}
+  {path: "contrato",component:ContratoComponent},
+  {path: "reportes",component:ReportesComponent},
+  {path: "registro",component:RegistroComponent},
+  {path: "nuevoDato",component:NuevosDatosComponent}
 ];
   
 @NgModule({

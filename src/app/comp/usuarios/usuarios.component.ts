@@ -7,6 +7,8 @@ import { CargoService } from 'src/app/servicios/cargo.service';
 import { Icargo } from 'src/app/modelo/Icargo';
 import { DatosGeneralesService } from 'src/app/servicios/datosGenerales.Service';
 import { IdatosGenerales } from 'src/app/modelo/IdatosGenerales';
+import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-usuarios',
@@ -21,23 +23,27 @@ export class UsuariosComponent implements OnInit {
   cargo: Icargo[] = [];
   datosGenerales: IdatosGenerales[] = [];
   consultaUsuarios = "";
-  tipoUsuario: string = 'cliente';
+  tipoUsuario: string = 'trabajador';
 
-  constructor(private clienteService: ClienteService, private trabajadorService: TrabajadorService, private cargoService: CargoService, private datosGeneralesService: DatosGeneralesService) {}
+  constructor(private clienteService: ClienteService, private trabajadorService: TrabajadorService, private cargoService: CargoService, 
+    private datosGeneralesService: DatosGeneralesService, private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit(): void {
-    this.getCliente();
+    //this.getCliente();
     this.getTrabajador();
     this.getCargo();
     this.getDatosGenerales();
-    //this.getCargo();
   }
 
-  getCliente = () => {
+  registrar() {
+    this.router.navigate(['/registro']);
+  }
+
+  /*getCliente = () => {
     this.clienteService.getCliente().subscribe((resp: any) => {
       this.cliente = resp;
     });
-  }
+  }*/
 
   getTrabajador = () => {
     this.trabajadorService.getTrabajador().subscribe((resp: any) => {

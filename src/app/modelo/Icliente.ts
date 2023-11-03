@@ -1,7 +1,8 @@
 import { datosGenerales } from "./datosGenerales";
+import { tipocliente } from "./tipoCliente";
 
 export interface Icliente {
   id_Cliente: number;
-  ident_Cliente: string;
   datos: datosGenerales;
+  tipoCLiente: tipocliente;
 }

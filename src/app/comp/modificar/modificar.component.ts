@@ -15,7 +15,7 @@ import { Iusuarios } from 'src/app/modelo/Iusuarios';
   styleUrls: ['./modificar.component.css']
 })
 export class ModificarComponent {
-  tipoModificacion: string = 'modProd';
+  tipoModificacion: string = 'modUsuario';
   parametros: any;
   productos: Iproductos[] = [];
   objProductos: productos = new productos();
