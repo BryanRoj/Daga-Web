@@ -45,8 +45,8 @@ export class RegistroComponent {
 
   /*************************************************************************************/
 
-  cargo: Icargo[] = [];
-  objCargo: cargo = new cargo();
+  cargo: any[] = [];
+  objCargo: any = {};
   insUpdCargo: boolean = true;
   textoFormCargo: string = "Insertar Nuevo Cargo";
 
@@ -64,8 +64,9 @@ export class RegistroComponent {
   }
 
   registrarCargo = () => {
-    this.objCargo.tipo_Cargo = this.formCargo.value.tipo_Cargo;
-    this.objCargo.descripcion_Cargo = this.formCargo.value.descripcion_Cargo;
+    this.objCargo.idCargo = this.formCargo.value.id_Cargo;
+    this.objCargo.tipoCargo = this.formCargo.value.tipo_Cargo;
+    this.objCargo.descripcionCargo = this.formCargo.value.descripcion_Cargo;
   
     // INSERTAR
     if (this.insUpdCargo) {
@@ -74,6 +75,8 @@ export class RegistroComponent {
         this.getCargo();
       });
     } else { // ACTUALIZAR
+      this.objCargo.idCargo = this.formCargo.value.id_Cargo;
+
       this.cargoService.putCargo(this.objCargo).subscribe(resp => {
         this.formCargo.reset();
         this.getCargo();
@@ -84,10 +87,10 @@ export class RegistroComponent {
   }
 
   editarCargo = (c: Icargo) => {
-    this.objCargo.id_Cargo = c.id_Cargo;
-    this.formCargo.controls['id_Cargo'].setValue(c.id_Cargo);
-    this.formCargo.controls['tipo_Cargo'].setValue(c.tipo_Cargo);
-    this.formCargo.controls['descripcion_Cargo'].setValue(c.descripcion_Cargo);
+    this.objCargo.id_Cargo = c.idCargo;
+    this.formCargo.controls['id_Cargo'].setValue(c.idCargo);
+    this.formCargo.controls['tipo_Cargo'].setValue(c.tipoCargo);
+    this.formCargo.controls['descripcion_Cargo'].setValue(c.descripcionCargo);
   
     // Texto
     this.textoFormCargo = "Actualizar Cargos";
@@ -95,20 +98,20 @@ export class RegistroComponent {
   }
   
   eliminarCargo = (c: Icargo) => {
-    let confirm = window.confirm(`¿Seguro que desea eliminar el cargo ${c.tipo_Cargo}?`);
+    let confirm = window.confirm(`¿Seguro que desea eliminar el cargo ${c.tipoCargo}?`);
     if (confirm) {
-      this.cargoService.deleCargo(c.id_Cargo).subscribe(resp => {
+      this.cargoService.deleCargo(c.idCargo).subscribe(resp => {
         this.getCargo();
       });
     }
   }
 
   /*************************************************************************************/
-  trabajador: Itrabajador[] = [];
+  trabajador: any[] = [];
   nombresDatosGenerales: string[] = [];
   tipoCargo: string[] = [];
   //trabajador: Itrabajador[] = [];
-  objTrabajador: trabajador = new trabajador();
+  objTrabajador: any = {};
   insUpdTrabajador: boolean = true;
   textoFormTrabajador: string = "Insertar Nuevo Trabajador";
   
@@ -128,7 +131,8 @@ export class RegistroComponent {
   }
 
   registrarTrabajador = () => {
-    this.objTrabajador.dni_Trabajador = this.formTrabajador.value.dni_Trabajador;
+    this.objTrabajador.idTrabajador = this.formTrabajador.value.id_Trabajador;
+    this.objTrabajador.dniTrabajador = this.formTrabajador.value.dni_Trabajador;
     this.objTrabajador.datosGenerales = this.formTrabajador.value.id_Datos;
     this.objTrabajador.cargo = this.formTrabajador.value.id_Datos
   
@@ -139,6 +143,8 @@ export class RegistroComponent {
         this.getTrabajador();
       });
     } else { // ACTUALIZAR
+      this.objTrabajador.idTrabajador = this.formTrabajador.value.id_Trabajador;
+
       this.trabajadorService.putTrabajador(this.objTrabajador).subscribe(resp => {
         this.formTrabajador.reset();
         this.getTrabajador();
@@ -150,10 +156,10 @@ export class RegistroComponent {
 
 
   editarTrabajador = (t: Itrabajador) => {
-    this.objTrabajador.id_Trabajador = t.id_Trabajador;
-    this.formTrabajador.controls['id_Trabajador'].setValue(t.id_Trabajador);
-    this.formTrabajador.controls['dni_Trabajador'].setValue(t.dni_Trabajador);
-    this.formTrabajador.controls['id_Cargo'].setValue(t.cargo.tipo_Cargo);
+    this.objTrabajador.id_Trabajador = t.idTrabajador;
+    this.formTrabajador.controls['id_Trabajador'].setValue(t.idTrabajador);
+    this.formTrabajador.controls['dni_Trabajador'].setValue(t.dniTrabajador);
+    this.formTrabajador.controls['id_Cargo'].setValue(t.cargo.tipoCargo);
     this.formTrabajador.controls['id_Datos'].setValue(t.datosGenerales.nombre);
 
     //Texto
@@ -165,7 +171,7 @@ export class RegistroComponent {
   eliminarTrabajador = (t: Itrabajador) => {
     let confirm = window.confirm(`Seguro que deseas eliminar al trbajador ${t.datosGenerales.nombre}?`);
     if (confirm) {
-      this.trabajadorService.deleTrabajador(t.id_Trabajador).subscribe(resp => {
+      this.trabajadorService.deleTrabajador(t.idTrabajador).subscribe(resp => {
           this.getTrabajador();
         })
     }

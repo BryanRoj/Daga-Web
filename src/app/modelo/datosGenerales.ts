@@ -1,5 +1,5 @@
 export class datosGenerales {
-    id_Datos: number = 0;
+    idDatos: number = 0;
     nombre: string = "";
     apellidos: string = "";
     distrito: string = "";

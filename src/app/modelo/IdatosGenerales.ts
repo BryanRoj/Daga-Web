@@ -1,5 +1,5 @@
 export interface IdatosGenerales {
-    id_Datos: number;
+    idDatos: number;
     nombre: string;
     apellidos: string;
     distrito: string;

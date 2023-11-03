@@ -1,5 +1,5 @@
 export class cargo {
-    id_Cargo: number = 0;
-    tipo_Cargo: string = "";
-    descripcion_Cargo: string = "";
+    idCargo: number = 0;
+    tipoCargo: string = "";
+    descripcionCargo: string = "";
   }

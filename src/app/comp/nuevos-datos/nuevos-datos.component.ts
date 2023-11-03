@@ -12,7 +12,13 @@ import { DatosGeneralesService } from 'src/app/servicios/datosGenerales.Service'
 })
 export class NuevosDatosComponent {
   parametros: any;
+  tipoModificacion: string = 'Registrar';
+  datosGenerales: any[] = [];
+  objDatosGenerales: any = {};
+  insUpdDatos: boolean = true;
+  textoFormDatos: string = "Insertar Nuevos Datos";
 
+  
   ngOnInit():void  {
     //this.appComponent.mostrarMenuAdministrador = false; // Mostrar el menú de contacto
     this.route.queryParamMap.subscribe(
@@ -23,17 +29,11 @@ export class NuevosDatosComponent {
 
   
   constructor(private route: ActivatedRoute, private datosGeneralesService: DatosGeneralesService) { }
-    
+
   /*************************************************************************************/
-
-  datosGenerales: IdatosGenerales[] = [];
-  objDatosGenerales: datosGenerales = new datosGenerales();
-  insUpdDatos: boolean = true;
-  textoFormDatos: string = "Insertar Nuevos Datos";
-
   
   formDatosGenerales = new FormGroup({
-    id_Datos: new FormControl(),
+    id_Datos: new FormControl(this.datosGenerales.length),
     nombre: new FormControl(),
     apellidos: new FormControl(),
     distrito: new FormControl(),
@@ -44,17 +44,18 @@ export class NuevosDatosComponent {
   getDatosGenerales = () => {
     this.datosGeneralesService.getDatosGenerales().subscribe((resp: any) => {
       this.datosGenerales = resp;
+      this.formDatosGenerales.controls['id_Datos'].setValue(this.datosGenerales.length + 1);
     });
   }
 
   registrarDatos = () => {
-    this.objDatosGenerales.id_Datos = this.formDatosGenerales.value.id_Datos;
+    this.objDatosGenerales.idDatos = this.formDatosGenerales.value.id_Datos;
     this.objDatosGenerales.nombre = this.formDatosGenerales.value.nombre;
     this.objDatosGenerales.apellidos = this.formDatosGenerales.value.apellidos;
     this.objDatosGenerales.distrito = this.formDatosGenerales.value.distrito
     this.objDatosGenerales.telefono = this.formDatosGenerales.value.telefono;
     this.objDatosGenerales.email = this.formDatosGenerales.value.email;
-  
+    
     // INSERTAR
     if (this.insUpdDatos) {
       this.datosGeneralesService.postDatosGenerales(this.objDatosGenerales).subscribe(resp => {
@@ -65,6 +66,7 @@ export class NuevosDatosComponent {
       this.datosGeneralesService.putDatosGenerales(this.objDatosGenerales).subscribe(resp => {
         this.formDatosGenerales.reset();
         this.getDatosGenerales();
+        this.tipoModificacion = 'Registrar';
         this.textoFormDatos = "Insertar Datos";
         this.insUpdDatos = true;
       })
@@ -72,15 +74,16 @@ export class NuevosDatosComponent {
   }
 
   editarDatos = (d: IdatosGenerales) => {
-    this.objDatosGenerales.id_Datos = d.id_Datos;
-    this.formDatosGenerales.controls['id_Datos'].setValue(d.id_Datos);
+    this.objDatosGenerales.id_Datos = d.idDatos;
+    this.formDatosGenerales.controls['id_Datos'].setValue(d.idDatos);
     this.formDatosGenerales.controls['nombre'].setValue(d.nombre);
     this.formDatosGenerales.controls['apellidos'].setValue(d.apellidos);
     this.formDatosGenerales.controls['distrito'].setValue(d.distrito);
     this.formDatosGenerales.controls['telefono'].setValue(d.telefono);
     this.formDatosGenerales.controls['email'].setValue(d.email);
-  
+    
     // Texto
+    this.tipoModificacion = 'Update';
     this.textoFormDatos = "Actualizar Datos";
     this.insUpdDatos = false;
   }
@@ -88,7 +91,7 @@ export class NuevosDatosComponent {
   eliminarDatos = (d: IdatosGenerales) => {
     let confirm = window.confirm(`¿Seguro que desea eliminar al usuario ${d.nombre}?`);
     if (confirm) {
-      this.datosGeneralesService.deleDatosGenerales(d.id_Datos).subscribe(resp => {
+      this.datosGeneralesService.deleDatosGenerales(d.idDatos).subscribe(resp => {
         this.getDatosGenerales();
       });
     }

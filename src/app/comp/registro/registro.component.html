@@ -26,9 +26,9 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let c of cargo">
-                            <td>{{c.id_Cargo}}</td>
-                            <td>{{c.tipo_Cargo}}</td>
-                            <td>{{c.descripcion_Cargo}}</td>
+                            <td>{{c.idCargo}}</td>
+                            <td>{{c.tipoCargo}}</td>
+                            <td>{{c.descripcionCargo}}</td>
                             <td>
                                 <button class="btn btn-warning btn-sm" (click)="editarCargo(c)">
                                     Editar
@@ -92,12 +92,12 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let t of trabajador">
-                            <td>{{t.id_Trabajador}}</td>
-                            <td>{{t.dni_Trabajador}}</td>
+                            <td>{{t.idTrabajador}}</td>
+                            <td>{{t.dniTrabajador}}</td>
                             <td>{{t.datosGenerales.nombre}}</td>
                             <td>{{t.datosGenerales.apellidos}}</td>
                             <td>{{t.datosGenerales.email}}</td>
-                            <td>{{t.cargo.tipo_Cargo}}</td>
+                            <td>{{t.cargo.tipoCargo}}</td>
                             <td>
                                 <button class="btn btn-warning btn-sm" (click)="editarTrabajador(t)">
                                     Editar
