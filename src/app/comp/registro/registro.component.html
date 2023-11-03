@@ -1,0 +1,182 @@
+<div class="container-fluid">
+    <h2>Registro Trabajador</h2>
+    <div class="mt-3">
+        <button type="button" class="btn btn-dark me-5" (click)="NuevoDato()">Gestor de Datos</button>
+    </div>
+    <h4>¿Qué desea modificar?</h4>
+    <div>
+        <select class="form-select" [(ngModel)]="Elegir">
+            <option value="modCargo">Cargo</option>
+            <option value="modTrabajador">Trabajador</option>
+        </select>
+    </div>
+
+    <!-------------------------------------------------------------------------------------------------------------------->
+
+    <div *ngIf="Elegir === 'modCargo'">
+        <div class="row">
+            <div class="col-12">
+                <h2 class="text-center text-primary mt-4">Gestor de Cargos</h2>
+                <p>Total: {{cargo.length}}</p>
+                <table class="table table-hover">
+                    <thead>
+                        <th>ID</th>
+                        <th>TIPO DE CARGO</th>
+                        <th>DESCRIPCION DE CARGO</th>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let c of cargo">
+                            <td>{{c.id_Cargo}}</td>
+                            <td>{{c.tipo_Cargo}}</td>
+                            <td>{{c.descripcion_Cargo}}</td>
+                            <td>
+                                <button class="btn btn-warning btn-sm" (click)="editarCargo(c)">
+                                    Editar
+                                </button>
+                            </td>
+                            <td>
+                                <button class="btn btn-danger btn-sm" (click)="eliminarCargo(c)">
+                                    Eliminar
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-12 ">
+                <h2 class="text-center">Formulario - {{textoFormCargo}}</h2>
+                <form [formGroup]="formCargo" (ngSubmit)="registrarCargo()">
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label class="label">ID</label>
+                                <input class="form-control" type="number" formControlName="id_Cargo" />
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label class="label">Tipo de cargo</label>
+                                <input class="form-control" type="text" formControlName="tipo_Cargo" />
+                            </div>
+                        </div>
+                        <div>
+                            <div class="form-group">
+                                <label class="label">Descricpion del cargo</label>
+                                <input class="form-control" type="text" formControlName="descripcion_Cargo" />
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-center mt-3">
+                        <button class="btn btn-success">{{textoFormCargo}}</button>
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-------------------------------------------------------------------------------------------------------------------->
+
+    <div *ngIf="Elegir === 'modTrabajador'">
+        <div class="row">
+            <div class="col-12">
+                <h2 class="text-center text-primary mt-4">Gestor de Cargos</h2>
+                <p>Total: {{trabajador.length}}</p>
+                <table class="table table-hover">
+                    <thead>
+                        <th>ID</th>
+                        <th>DNI</th>
+                        <th>NOMBRE</th>
+                        <th>APELLIDOS</th>
+                        <th>EMAIL</th>
+                        <th>CARGO</th>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let t of trabajador">
+                            <td>{{t.id_Trabajador}}</td>
+                            <td>{{t.dni_Trabajador}}</td>
+                            <td>{{t.datosGenerales.nombre}}</td>
+                            <td>{{t.datosGenerales.apellidos}}</td>
+                            <td>{{t.datosGenerales.email}}</td>
+                            <td>{{t.cargo.tipo_Cargo}}</td>
+                            <td>
+                                <button class="btn btn-warning btn-sm" (click)="editarTrabajador(t)">
+                                    Editar
+                                </button>
+                            </td>
+                            <td>
+                                <button class="btn btn-danger btn-sm" (click)="eliminarTrabajador(t)">
+                                    Eliminar
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-12" *ngIf="tipoModificacion === 'Registrar'">
+                <h2 class="text-center">Formulario - {{textoFormTrabajador}}</h2>
+                <form [formGroup]="formTrabajador" (ngSubmit)="registrarTrabajador()">
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label class="label">ID</label>
+                                <input class="form-control" type="number" formControlName="id_Trabajador" />
+                            </div>
+                            <div>
+                                <label class="label">Seleccionar Persona</label>
+                                <select class="form-control" formControlName="id_Datos">
+                                    <option *ngFor="let nombre of nombresDatosGenerales" [value]="nombre">{{nombre}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label class="label">DNI Trabajador</label>
+                                <input class="form-control" type="text" formControlName="dni_Trabajador" />
+                            </div>
+                            <div>
+                                <label class="label">Seleccionar Cargo</label>
+                                <select class="form-control" formControlName="id_Cargo">
+                                    <option *ngFor="let tipo_Cargo of tipoCargo" [value]="tipo_Cargo">{{tipo_Cargo}}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-center mt-3">
+                        <button class="btn btn-success">{{textoFormTrabajador}}</button>
+                    </p>
+                </form>
+            </div>
+
+            <div class="col-12" *ngIf="tipoModificacion === 'Update'">
+                <h2 class="text-center">Formulario - {{textoFormTrabajador}}</h2>
+                <form [formGroup]="formTrabajador" (ngSubmit)="registrarTrabajador()">
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label class="label">ID</label>
+                                <input class="form-control" type="number" formControlName="id_Trabajador" />
+                            </div>
+                            <div class="form-group">
+                                <label class="label">DNI Trabajador</label>
+                                <input class="form-control" type="text" formControlName="dni_Trabajador" />
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label class="label">ID Datos</label>
+                                <input class="form-control" type="number" formControlName="datosGenerales.id_Datos" />
+                            </div>
+                            <div class="form-group">
+                                <label class="label">ID Cargo</label>
+                                <input class="form-control" type="number" formControlName="id_Cargo" />
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-center mt-3">
+                        <button class="btn btn-success">{{textoFormTrabajador}}</button>
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
