@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Iproductos } from '../modelo/Iproductos';
+import { Iproductos } from '../modelo/NoUsados/Iproductos';
 import { Observable, map } from 'rxjs';
 
 @Injectable({

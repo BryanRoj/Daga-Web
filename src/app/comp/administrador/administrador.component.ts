@@ -3,9 +3,9 @@ import { Router } from '@angular/router';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { AppComponent } from 'src/app/app.component';
-import { Ilogin } from 'src/app/modelo/Ilogin';
+import { Ilogin } from 'src/app/modelo/Login/Ilogin';
 import { LoginService } from 'src/app/servicios/login.service';
-import { login } from 'src/app/modelo/login';
+import { login } from 'src/app/modelo/Login/login';
 
 
 @Component({

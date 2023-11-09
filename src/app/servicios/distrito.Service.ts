@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IdatosGenerales } from '../modelo/DatosGenerales/IdatosGenerales';
+import { Idistrito } from '../modelo/Distrito/Idistrito';
 import { map } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { GlobalService } from './globalService';
@@ -7,32 +7,32 @@ import { GlobalService } from './globalService';
 @Injectable({
   providedIn: 'root'
 })
-export class DatosGeneralesService {
+export class DistritoService {
 
-  URL:string = "/datosGeneralesDaga";
+  URL:string = "/distritoDaga";
   apiUrl: any;
 
   constructor(private http:HttpClient, private globalService:GlobalService) {
     this.URL = this.globalService.getUrl() + this.URL;
   }
 //Listado
-  getDatosGenerales = () => {
+  getDistrito = () => {
     let header = new HttpHeaders().set('Type-content','application/json');
     return this.http.get(this.URL, {headers : header})
   }
 
-  postDatosGenerales = (data:IdatosGenerales) => {
-    return this.http.post<IdatosGenerales>(this.URL,data)
+  postDistrito = (data:Idistrito) => {
+    return this.http.post<Idistrito>(this.URL,data)
     .pipe(map((emp)=>data)); // importar de rxjs
   }
 
-  deleDatosGenerales = (id:number) => {
-    return this.http.delete<IdatosGenerales>(`${this.URL}/${id}`)
+  deleDistrito = (id:number) => {
+    return this.http.delete<Idistrito>(`${this.URL}/${id}`)
     .pipe(map((emp)=>id));
   }
 
-  putDatosGenerales = (data:IdatosGenerales) => {
-    return this.http.put<IdatosGenerales>(this.URL,data)
+  putDistrito = (data:Idistrito) => {
+    return this.http.put<Idistrito>(this.URL,data)
     .pipe(map((emp)=>data)); // importar de rxjs
   }
 }

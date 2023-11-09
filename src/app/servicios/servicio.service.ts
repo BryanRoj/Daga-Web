@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Iservicio } from '../modelo/Iservicio';
+import { Iservicio } from '../modelo/Servicio/Iservicio';
 import { map } from 'rxjs';
 import { GlobalService } from './globalService';
 

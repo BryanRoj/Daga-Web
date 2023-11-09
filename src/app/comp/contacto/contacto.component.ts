@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { consultas } from 'src/app/modelo/consultas';
+import { consultas } from 'src/app/modelo/Consultas/consultas';
 import { ConsultasService } from 'src/app/servicios/consultas.service';
-import { Iconsultas } from 'src/app/modelo/Iconsultas';
+import { Iconsultas } from 'src/app/modelo/Consultas/Iconsultas';
 
 @Component({
   selector: 'app-contacto',

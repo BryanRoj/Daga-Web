@@ -2,12 +2,6 @@
 <div class="mt-3">
     <button type="button" class="btn btn-dark me-5" (click)="registrar()">Registrar</button>
 </div>
-<div class="mt-3">
-    <select class="form-select" [(ngModel)]="tipoUsuario">
-        <option value="trabajador">Trabajador</option>
-        <option value="cliente">Cliente</option>
-    </select>
-</div>
 
 <div *ngIf="tipoUsuario === 'trabajador'" class="container">
     <div class="row">
@@ -29,8 +23,8 @@
             </thead>
             <tbody>
                 <tr *ngFor="let t of trabajador">
-                    <td>{{t.id_Trabajador}}</td>
-                    <td>{{t.dni_Trabajador}}</td>
+                    <td>{{t.idTrabajador}}</td>
+                    <td>{{t.dniTrabajador}}</td>
                     <td>{{t.datosGenerales.nombre}}</td>
                     <td>{{t.datosGenerales.apellidos}}</td>
                     <td>{{t.datosGenerales.email}}</td>

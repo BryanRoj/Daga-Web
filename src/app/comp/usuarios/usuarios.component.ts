@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { Icliente } from 'src/app/modelo/Icliente';
-import { Itrabajador } from 'src/app/modelo/Itrabajador';
+import { Icliente } from 'src/app/modelo/Cliente/Icliente';
+import { Itrabajador } from 'src/app/modelo/Trabajador/Itrabajador';
 import { ClienteService } from 'src/app/servicios/cliente.service';
 import { TrabajadorService } from 'src/app/servicios/trabajador.service';
 import { CargoService } from 'src/app/servicios/cargo.service';
-import { Icargo } from 'src/app/modelo/Icargo';
+import { Icargo } from 'src/app/modelo/Cargo/Icargo';
 import { DatosGeneralesService } from 'src/app/servicios/datosGenerales.Service';
-import { IdatosGenerales } from 'src/app/modelo/IdatosGenerales';
+import { IdatosGenerales } from 'src/app/modelo/DatosGenerales/IdatosGenerales';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 

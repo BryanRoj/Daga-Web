@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Iusuarios } from '../modelo/Iusuarios';
+import { Iusuarios } from '../modelo/NoUsados/Iusuarios';
 import { Observable, map } from 'rxjs';
 import { GlobalService } from './globalService';
 

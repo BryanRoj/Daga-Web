@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Iconsultas } from '../modelo/Iconsultas';
+import { Iconsultas } from '../modelo/Consultas/Iconsultas';
 import { map } from 'rxjs';
 import { GlobalService } from './globalService';
 

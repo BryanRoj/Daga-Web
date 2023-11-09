@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Ipresupuesto } from '../modelo/Ipresupuesto';
+import { Ipresupuesto } from '../modelo/Presupuesto/Ipresupuesto';
 import { map } from 'rxjs';
 
 @Injectable({

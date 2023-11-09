@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs';
-import { Icomprobante } from '../modelo/Icomprobante';
+import { Icomprobante } from '../modelo/Comprobante/Icomprobante';
 import {GlobalService} from "./globalService";
 
 @Injectable({

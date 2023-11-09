@@ -2,12 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { AppComponent } from 'src/app/app.component';
 import { ActivatedRoute } from '@angular/router';
-import { productos } from 'src/app/modelo/productos';
-import { Iproductos } from 'src/app/modelo/Iproductos';
-import { usuarios } from 'src/app/modelo/usuarios';
+import { productos } from 'src/app/modelo/NoUsados/productos';
+import { Iproductos } from 'src/app/modelo/NoUsados/Iproductos';
+import { usuarios } from 'src/app/modelo/NoUsados/usuarios';
 import { UsuariosService } from 'src/app/servicios/usuarios.service';
 import { ProductosService } from 'src/app/servicios/productos.service';
-import { Iusuarios } from 'src/app/modelo/Iusuarios';
+import { Iusuarios } from 'src/app/modelo/NoUsados/Iusuarios';
 
 @Component({
   selector: 'app-modificar',

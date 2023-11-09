@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Ilogin } from '../modelo/Ilogin';
+import { Ilogin } from '../modelo/Login/Ilogin';
 import { Observable, map } from 'rxjs';
 import {GlobalService} from "./globalService";
 

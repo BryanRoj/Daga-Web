@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Icargo } from 'src/app/modelo/Icargo';
-import { IdatosGenerales } from 'src/app/modelo/IdatosGenerales';
-import { Itrabajador } from 'src/app/modelo/Itrabajador';
-import { cargo } from 'src/app/modelo/cargo';
-import { datosGenerales } from 'src/app/modelo/datosGenerales';
-import { trabajador } from 'src/app/modelo/trabajador';
+import { Icargo } from 'src/app/modelo/Cargo/Icargo';
+import { IdatosGenerales } from 'src/app/modelo/DatosGenerales/IdatosGenerales';
+import { Itrabajador } from 'src/app/modelo/Trabajador/Itrabajador';
+import { cargo } from 'src/app/modelo/Cargo/cargo';
+import { datosGenerales } from 'src/app/modelo/DatosGenerales/datosGenerales';
+import { trabajador } from 'src/app/modelo/Trabajador/trabajador';
 import { CargoService } from 'src/app/servicios/cargo.service';
 import { DatosGeneralesService } from 'src/app/servicios/datosGenerales.Service';
 import { TrabajadorService } from 'src/app/servicios/trabajador.service';
@@ -117,7 +117,6 @@ export class RegistroComponent {
   
   formTrabajador = new FormGroup({
     id_Trabajador: new FormControl(),
-    dni_Trabajador: new FormControl(),
     id_Datos: new FormControl(),
     id_Cargo: new FormControl()
   });
@@ -125,6 +124,7 @@ export class RegistroComponent {
   getTrabajador = () => {
     this.trabajadorService.getTrabajador().subscribe((resp: any) => {
       this.trabajador = resp;
+      this.formTrabajador.controls['id_Trabajador'].setValue(this.trabajador.length + 1);
       console.log(resp)
       console.log(this.trabajador)
     });
@@ -132,9 +132,8 @@ export class RegistroComponent {
 
   registrarTrabajador = () => {
     this.objTrabajador.idTrabajador = this.formTrabajador.value.id_Trabajador;
-    this.objTrabajador.dniTrabajador = this.formTrabajador.value.dni_Trabajador;
     this.objTrabajador.datosGenerales = this.formTrabajador.value.id_Datos;
-    this.objTrabajador.cargo = this.formTrabajador.value.id_Datos
+    this.objTrabajador.cargo = this.formTrabajador.value.id_Cargo
   
     // INSERTAR
     if (this.insUpdTrabajador) {
@@ -158,7 +157,6 @@ export class RegistroComponent {
   editarTrabajador = (t: Itrabajador) => {
     this.objTrabajador.id_Trabajador = t.idTrabajador;
     this.formTrabajador.controls['id_Trabajador'].setValue(t.idTrabajador);
-    this.formTrabajador.controls['dni_Trabajador'].setValue(t.dniTrabajador);
     this.formTrabajador.controls['id_Cargo'].setValue(t.cargo.tipoCargo);
     this.formTrabajador.controls['id_Datos'].setValue(t.datosGenerales.nombre);
 

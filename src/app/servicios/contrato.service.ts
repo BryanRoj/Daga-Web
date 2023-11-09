@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Icontrato } from '../modelo/Icontrato';
+import { Icontrato } from '../modelo/Contrato/Icontrato';
 import { map } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { GlobalService } from './globalService';

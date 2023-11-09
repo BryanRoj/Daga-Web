@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { IdatosGenerales } from 'src/app/modelo/IdatosGenerales';
-import { datosGenerales } from 'src/app/modelo/datosGenerales';
+import { IdatosGenerales } from 'src/app/modelo/DatosGenerales/IdatosGenerales';
+import { datosGenerales } from 'src/app/modelo/DatosGenerales/datosGenerales';
 import { DatosGeneralesService } from 'src/app/servicios/datosGenerales.Service';
+import { DistritoService } from 'src/app/servicios/distrito.Service';
 
 @Component({
   selector: 'app-nuevos-datos',
@@ -13,11 +14,15 @@ import { DatosGeneralesService } from 'src/app/servicios/datosGenerales.Service'
 export class NuevosDatosComponent {
   parametros: any;
   tipoModificacion: string = 'Registrar';
+  
   datosGenerales: any[] = [];
   objDatosGenerales: any = {};
   insUpdDatos: boolean = true;
   textoFormDatos: string = "Insertar Nuevos Datos";
 
+  distrito: any[] = [];
+  objDistrito: any = {};
+  nombresDistrito: string[] = [];
   
   ngOnInit():void  {
     //this.appComponent.mostrarMenuAdministrador = false; // Mostrar el menú de contacto
@@ -25,10 +30,12 @@ export class NuevosDatosComponent {
       (params) => { this.parametros = { ...params.keys, ...params } }
     );
     this.getDatosGenerales();
+    this.getDistrito();
+    this.getNombresDistritos();
   }
 
   
-  constructor(private route: ActivatedRoute, private datosGeneralesService: DatosGeneralesService) { }
+  constructor(private route: ActivatedRoute, private datosGeneralesService: DatosGeneralesService, private distritoService: DistritoService) { }
 
   /*************************************************************************************/
   
@@ -36,7 +43,9 @@ export class NuevosDatosComponent {
     id_Datos: new FormControl(this.datosGenerales.length),
     nombre: new FormControl(),
     apellidos: new FormControl(),
-    distrito: new FormControl(),
+    dni: new FormControl(),
+    edad: new FormControl(),
+    nomdistrito: new FormControl(),
     telefono: new FormControl(),
     email	: new FormControl()
   });
@@ -48,11 +57,19 @@ export class NuevosDatosComponent {
     });
   }
 
+  getDistrito = () => {
+    this.distritoService.getDistrito().subscribe((resp: any) => {
+      this.distrito = resp;
+    })
+  }
+
   registrarDatos = () => {
     this.objDatosGenerales.idDatos = this.formDatosGenerales.value.id_Datos;
     this.objDatosGenerales.nombre = this.formDatosGenerales.value.nombre;
     this.objDatosGenerales.apellidos = this.formDatosGenerales.value.apellidos;
-    this.objDatosGenerales.distrito = this.formDatosGenerales.value.distrito
+    this.objDatosGenerales.dni = this.formDatosGenerales.value.dni;
+    this.objDatosGenerales.edad = this.formDatosGenerales.value.edad;
+    this.objDatosGenerales.distrito = this.formDatosGenerales.value.nomdistrito;
     this.objDatosGenerales.telefono = this.formDatosGenerales.value.telefono;
     this.objDatosGenerales.email = this.formDatosGenerales.value.email;
     
@@ -78,7 +95,7 @@ export class NuevosDatosComponent {
     this.formDatosGenerales.controls['id_Datos'].setValue(d.idDatos);
     this.formDatosGenerales.controls['nombre'].setValue(d.nombre);
     this.formDatosGenerales.controls['apellidos'].setValue(d.apellidos);
-    this.formDatosGenerales.controls['distrito'].setValue(d.distrito);
+    this.formDatosGenerales.controls['nomdistrito'].setValue(d.distrito);
     this.formDatosGenerales.controls['telefono'].setValue(d.telefono);
     this.formDatosGenerales.controls['email'].setValue(d.email);
     
@@ -95,5 +112,11 @@ export class NuevosDatosComponent {
         this.getDatosGenerales();
       });
     }
+  }
+
+  getNombresDistritos() {
+    this.distritoService.getDistrito().subscribe((resp: any) => {
+      this.getNombresDistritos = resp.map((distrito: any) => distrito.nombreDistrito);
+    });
   }
 }

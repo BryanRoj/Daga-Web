@@ -93,7 +93,7 @@
                     <tbody>
                         <tr *ngFor="let t of trabajador">
                             <td>{{t.idTrabajador}}</td>
-                            <td>{{t.dniTrabajador}}</td>
+                            <td>{{t.datosGenerales.dni}}</td>
                             <td>{{t.datosGenerales.nombre}}</td>
                             <td>{{t.datosGenerales.apellidos}}</td>
                             <td>{{t.datosGenerales.email}}</td>
@@ -136,7 +136,7 @@
                             <div>
                                 <label class="label">Seleccionar Cargo</label>
                                 <select class="form-control" formControlName="id_Cargo">
-                                    <option *ngFor="let tipo_Cargo of tipoCargo" [value]="tipo_Cargo">{{tipo_Cargo}}</option>
+                                    <option *ngFor="let tipoCargo of tipoCargo" [value]="tipoCargo">{{tipoCargo}}</option>
                                 </select>
                             </div>
                         </div>
@@ -155,10 +155,6 @@
                             <div class="form-group">
                                 <label class="label">ID</label>
                                 <input class="form-control" type="number" formControlName="id_Trabajador" />
-                            </div>
-                            <div class="form-group">
-                                <label class="label">DNI Trabajador</label>
-                                <input class="form-control" type="text" formControlName="dni_Trabajador" />
                             </div>
                         </div>
                         <div class="col-6">
