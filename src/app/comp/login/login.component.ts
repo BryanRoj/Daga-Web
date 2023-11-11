@@ -47,6 +47,7 @@ export class LoginComponent{
           } else {
             this.router.navigate(['/administrador']);
             this.servicio.isLoggedIn = true; // Inicio de sesión exitoso
+            localStorage.setItem('usuario' ,JSON.stringify(response));
           }
         } else {
           // Credenciales incorrectas

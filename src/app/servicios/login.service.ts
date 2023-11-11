@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Ilogin } from '../modelo/Login/Ilogin';
 import { Observable, map } from 'rxjs';
 import {GlobalService} from "./globalService";
+import { login } from '../modelo/Login/login';
 
 @Injectable({
   providedIn: 'root'
@@ -18,12 +19,16 @@ export class LoginService {
   }
 //Listado
   getLogin = () => {
-
     let header = new HttpHeaders().set('Type-content','application/json');
-    return this.http.get(this.URL, {headers : header})
+    return this.http.get<login[]>(this.URL, {headers : header})
   }
 
-  postLogin = (data:Ilogin) => {
+  getLoginById = (id: number) => {
+    let header = new HttpHeaders().set('Type-content','application/json');
+    return this.http.get<login>(this.URL + '/' + id, {headers : header})
+  }
+
+  postLogin = (data:any) => {
     return this.http.post<Ilogin>(this.URL,data)
     .pipe(map((emp)=>data)); // importar de rxjs
   }
@@ -33,7 +38,7 @@ export class LoginService {
     .pipe(map((emp)=>id));
   }
 
-  putLogin = (data:Ilogin) => {
+  putLogin = (data:any) => {
     return this.http.put<Ilogin>(this.URL,data)
     .pipe(map((emp)=>data)); // importar de rxjs
   }
@@ -45,7 +50,10 @@ export class LoginService {
     return this.http.get<Ilogin>(url, {headers : header});
   }
 
-  cerrarSesion(): void {
+  cerrarSesion(): boolean {
     this.isLoggedIn = false; // Actualiza el valor de isLoggedIn a false
+    window.location.href = '/login';
+    return false;
   }
+
 }

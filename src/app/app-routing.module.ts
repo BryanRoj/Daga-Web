@@ -34,6 +34,7 @@ const routes: Routes = [
   {path: "contrato",component:ContratoComponent},
   {path: "reportes",component:ReportesComponent},
   {path: "registro",component:RegistroComponent},
+  {path: "cargo",component:RegistroComponent},
   {path: "nuevoDato",component:NuevosDatosComponent}
 ];
   

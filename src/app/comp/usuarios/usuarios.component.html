@@ -1,69 +1,154 @@
-<h1>USUARIOS</h1>
+<h3>Gestión Trabajadores</h3>
+<hr />
 <div class="mt-3">
-    <button type="button" class="btn btn-dark me-5" (click)="registrar()">Registrar</button>
+    <button (click)="nuevo()" type="button" class="btn btn-dark me-5" >Registrar</button>
 </div>
 
-<div *ngIf="tipoUsuario === 'trabajador'" class="container">
-    <div class="row">
-        <div class="col-12 mb-4">
-            Buscar: <input class="form-control" type="text" [(ngModel)]="consultaUsuarios" />
+<div class="container-fluid">
+    <div class="row mt-2">
+        <div class="table-responsive">
+            <table class="table table-hover table-bordered">
+              <thead>
+                  <tr>
+                      <th>ID</th>
+                      <th>DNI</th>
+                      <th>NOMBRE</th>
+                      <th>APELLIDOS</th>
+                      <th>EMAIL</th>
+                      <th>DISTRITO</th>
+                      <th>TELEFONO</th>
+                      <th>CARGO</th>
+                      <th>USUARIO</th>
+                      <th>ACCIONES</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr *ngFor="let t of trabajadores">
+                      <td>{{t.trabajador.idTrabajador}}</td>
+                      <td>{{t.trabajador.datosGenerales.dni}}</td>
+                      <td>{{t.trabajador.datosGenerales.nombre}}</td>
+                      <td>{{t.trabajador.datosGenerales.apellidos}}</td>
+                      <td>{{t.trabajador.datosGenerales.email}}</td>
+                      <td>{{t.trabajador.datosGenerales.distrito.nombreDistrito}}</td>
+                      <td>{{t.trabajador.datosGenerales.telefono}}</td>
+                      <td>{{t.trabajador.cargo.tipoCargo}}</td>
+                      <td>{{t.usuario}}</td>
+                      <td>
+                        <button type="button" class="btn btn-info btn-sm" title="Editar"
+                          (click)="cargarDatos(t)">
+                          <i class="fa fa-edit"></i>
+                        </button>
+                        &nbsp;
+                        <button type="button" class="btn btn-danger btn-sm" title="Eliminar"
+                          (click)="eliminar(t)">
+                          <i class="fa fa-trash"></i>
+                        </button>
+                      </td>
+                  </tr>
+              </tbody>
+          </table>
         </div>
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>DNI</th>
-                    <th>NOMBRE</th>
-                    <th>APELLIDOS</th>
-                    <th>EMAIL</th>
-                    <th>DISTRITO</th>
-                    <th>TELEFONO</th>
-                    <th>CARGO</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let t of trabajador">
-                    <td>{{t.idTrabajador}}</td>
-                    <td>{{t.dniTrabajador}}</td>
-                    <td>{{t.datosGenerales.nombre}}</td>
-                    <td>{{t.datosGenerales.apellidos}}</td>
-                    <td>{{t.datosGenerales.email}}</td>
-                    <td>{{t.datosGenerales.distrito}}</td>
-                    <td>{{t.datosGenerales.telefono}}</td>
-                    <td>{{t.cargo.tipoCargo}}</td>
-                </tr>
-            </tbody>
-        </table>
     </div>
 </div>
 
-<div *ngIf="tipoUsuario === 'cliente'" class="container">
-    <div class="row">
-        <div class="col-12 mb-4">
-            Buscar: <input class="form-control" type="text" [(ngModel)]="consultaUsuarios" />
-        </div>
-        <!--<table class="table table-hover">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>NOMBRE</th>
-                    <th>DNI</th>
-                    <th>DIRECCIÓN</th>
-                    <th>DISTRITO</th>
-                    <th>TELÉFONO</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let c of cliente">
-                        <td>{{c.id_Cliente}}</td>
-                        <td>{{c.nombre_Cliente}}</td>
-                        <td>{{c.d_identidad_Cliente}}</td>
-                        <td>{{c.direccion_Cliente}}</td>
-                        <td>{{c.distrito_Cliente}}</td>
-                        <td>{{c.telf_Cliente}}</td>
-                </tr>
-            </tbody>
-        </table>-->
-    </div>
-</div>
+<div class="modal fade" id="modalNuevo"  data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" >::: {{trab.id_Login == 0 ? 'Nuevo': 'Editar' }} Trabajador :::</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
 
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="mb-3">
+                <label>Nombres:</label>
+                <input type="text"  [(ngModel)]="trab.trabajador.datosGenerales.nombre" class="form-control" maxlength="40">
+               </div>
+            </div>
+
+            <div class="col-sm-6">
+              <div class="mb-3">
+                <label>Apellidos:</label>
+                <input type="text" name="apellidos" [(ngModel)]="trab.trabajador.datosGenerales.apellidos" class="form-control" maxlength="40">
+               </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-3">
+              <div class="mb-3">
+                <label>Edad:</label>
+                <input type="number" name="edad" [(ngModel)]="trab.trabajador.datosGenerales.edad" class="form-control" >
+               </div>
+            </div>
+
+            <div class="col-sm-3">
+              <div class="mb-3">
+                <label>Telefono:</label>
+                <input type="text" name="telefono" [(ngModel)]="trab.trabajador.datosGenerales.telefono" class="form-control" maxlength="9">
+               </div>
+            </div>
+
+            <div class="col-sm-6">
+              <div class="mb-3">
+                <label>DNI:</label>
+                <input type="text" name="dni" #dni="ngModel" [(ngModel)]="trab.trabajador.datosGenerales.dni" class="form-control" maxlength="8">
+               </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="mb-3">
+                <label>Distrito:</label>
+                <select class="form-control" name="idDistrito" [(ngModel)]="trab.trabajador.datosGenerales.distrito.idDistrito">
+                  <option value="0">::: Selecione :::</option>
+                  <option *ngFor="let item of distritos" value="{{item.idDistrito}}">{{item.nombreDistrito}}</option>
+                </select>
+               </div>
+            </div>
+
+            <div class="col-sm-6">
+              <div class="mb-3">
+                <label>Cargo:</label>
+                <select class="form-control" name="idCargo" [(ngModel)]="trab.trabajador.cargo.idCargo">
+                  <option value="0">::: Selecione :::</option>
+                  <option *ngFor="let item of cargos" value="{{item.idCargo}}">{{item.tipoCargo}}</option>
+                </select>
+               </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-3">
+              <div class="mb-3">
+                <label>Email:</label>
+                <input type="text" name="email" [(ngModel)]="trab.trabajador.datosGenerales.email" class="form-control" maxlength="40">
+               </div>
+            </div>
+
+            <div class="col-sm-3">
+              <div class="mb-3">
+                <label>Usuario:</label>
+                <input type="text" name="usuario" [(ngModel)]="trab.usuario" class="form-control" maxlength="40">
+               </div>
+            </div>
+
+            <div *ngIf="trab.id_Login != null" class="col-sm-6">
+              <div class="mb-3">
+                <label>Contraseña:</label>
+                <input type="password" name="contrasena" [(ngModel)]="trab.contrasena" class="form-control" >
+               </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          <button (click)="guardar()" type="button" class="btn btn-primary">Guardar</button>
+        </div>
+
+    </div>
+  </div>
+</div>

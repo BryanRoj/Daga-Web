@@ -17,7 +17,7 @@ import { TrabajadorService } from 'src/app/servicios/trabajador.service';
   styleUrls: ['./registro.component.css']
 })
 export class RegistroComponent {
-  Elegir: string = 'modTrabajador';
+  Elegir: string = 'modCargo';
   tipoModificacion: string = 'Registrar';
   parametros: any;
 
@@ -27,10 +27,6 @@ export class RegistroComponent {
       (params) => { this.parametros = { ...params.keys, ...params } }
     );
     this.getCargo();
-    this.getTrabajador();
-
-    this.getNombresDatosGenerales();
-    this.getTipoCargo();
   }
 
   
@@ -60,6 +56,7 @@ export class RegistroComponent {
   getCargo = () => {
     this.cargoService.getCargo().subscribe((resp: any) => {
       this.cargo = resp;
+      this.formCargo.controls['id_Cargo'].setValue(this.cargo.length + 1);
     });
   }
 
@@ -106,84 +103,4 @@ export class RegistroComponent {
     }
   }
 
-  /*************************************************************************************/
-  trabajador: any[] = [];
-  nombresDatosGenerales: string[] = [];
-  tipoCargo: string[] = [];
-  //trabajador: Itrabajador[] = [];
-  objTrabajador: any = {};
-  insUpdTrabajador: boolean = true;
-  textoFormTrabajador: string = "Insertar Nuevo Trabajador";
-  
-  formTrabajador = new FormGroup({
-    id_Trabajador: new FormControl(),
-    id_Datos: new FormControl(),
-    id_Cargo: new FormControl()
-  });
-
-  getTrabajador = () => {
-    this.trabajadorService.getTrabajador().subscribe((resp: any) => {
-      this.trabajador = resp;
-      this.formTrabajador.controls['id_Trabajador'].setValue(this.trabajador.length + 1);
-      console.log(resp)
-      console.log(this.trabajador)
-    });
-  }
-
-  registrarTrabajador = () => {
-    this.objTrabajador.idTrabajador = this.formTrabajador.value.id_Trabajador;
-    this.objTrabajador.datosGenerales = this.formTrabajador.value.id_Datos;
-    this.objTrabajador.cargo = this.formTrabajador.value.id_Cargo
-  
-    // INSERTAR
-    if (this.insUpdTrabajador) {
-      this.trabajadorService.postTrabajador(this.objTrabajador).subscribe(resp => {
-        this.formTrabajador.reset(); // Limpiar el formulario
-        this.getTrabajador();
-      });
-    } else { // ACTUALIZAR
-      this.objTrabajador.idTrabajador = this.formTrabajador.value.id_Trabajador;
-
-      this.trabajadorService.putTrabajador(this.objTrabajador).subscribe(resp => {
-        this.formTrabajador.reset();
-        this.getTrabajador();
-        this.textoFormTrabajador = "Insertar Trabajador";
-        this.insUpdTrabajador = true;
-      })
-    }
-  }
-
-
-  editarTrabajador = (t: Itrabajador) => {
-    this.objTrabajador.id_Trabajador = t.idTrabajador;
-    this.formTrabajador.controls['id_Trabajador'].setValue(t.idTrabajador);
-    this.formTrabajador.controls['id_Cargo'].setValue(t.cargo.tipoCargo);
-    this.formTrabajador.controls['id_Datos'].setValue(t.datosGenerales.nombre);
-
-    //Texto
-    this.tipoModificacion = 'Update';
-    this.textoFormTrabajador = "Actualizar Trabajador";
-    this.insUpdTrabajador = false;
-  }
-
-  eliminarTrabajador = (t: Itrabajador) => {
-    let confirm = window.confirm(`Seguro que deseas eliminar al trbajador ${t.datosGenerales.nombre}?`);
-    if (confirm) {
-      this.trabajadorService.deleTrabajador(t.idTrabajador).subscribe(resp => {
-          this.getTrabajador();
-        })
-    }
-  }
-
-  getNombresDatosGenerales() {
-    this.datosGeneralesService.getDatosGenerales().subscribe((resp: any) => {
-      this.nombresDatosGenerales = resp.map((dato: any) => dato.nombre);
-    });
-  }
-
-  getTipoCargo(){
-    this.cargoService.getCargo().subscribe((resp: any) => {
-      this.tipoCargo = resp.map((cargo: any) => cargo.tipo_Cargo);
-    });
-  }
 }

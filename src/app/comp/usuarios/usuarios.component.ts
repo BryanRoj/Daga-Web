@@ -1,14 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Icliente } from 'src/app/modelo/Cliente/Icliente';
-import { Itrabajador } from 'src/app/modelo/Trabajador/Itrabajador';
-import { ClienteService } from 'src/app/servicios/cliente.service';
-import { TrabajadorService } from 'src/app/servicios/trabajador.service';
+import { login } from 'src/app/modelo/Login/login';
 import { CargoService } from 'src/app/servicios/cargo.service';
-import { Icargo } from 'src/app/modelo/Cargo/Icargo';
-import { DatosGeneralesService } from 'src/app/servicios/datosGenerales.Service';
-import { IdatosGenerales } from 'src/app/modelo/DatosGenerales/IdatosGenerales';
-import { ActivatedRoute } from '@angular/router';
-import { Router } from '@angular/router';
+import { DistritoService } from 'src/app/servicios/distrito.Service';
+import { LoginService } from 'src/app/servicios/login.service';
+
+declare var $: any;
 
 @Component({
   selector: 'app-usuarios',
@@ -16,53 +12,70 @@ import { Router } from '@angular/router';
   styleUrls: ['./usuarios.component.css']
 })
 export class UsuariosComponent implements OnInit {
-  vista: string = 'carta';
-  subrayado: string = "text-decoration-underline mt-3";
-  cliente: Icliente[] = [];
-  trabajador: any[] = [];
-  cargo: Icargo[] = [];
-  datosGenerales: IdatosGenerales[] = [];
+  trabajadores: any[] = [];
+  distritos: any[] = [];
+  cargos : any[] = [];
+  trab: login = new login();
   consultaUsuarios = "";
-  tipoUsuario: string = 'trabajador';
 
-  constructor(private clienteService: ClienteService, private trabajadorService: TrabajadorService, private cargoService: CargoService, 
-    private datosGeneralesService: DatosGeneralesService, private route: ActivatedRoute, private router: Router) {}
+  constructor(
+    private loginService: LoginService,
+    private distritoService: DistritoService,
+    private cargoService: CargoService) {}
 
   ngOnInit(): void {
-    //this.getCliente();
-    this.getTrabajador();
-    this.getCargo();
-    this.getDatosGenerales();
+    this.listarDistritos();
+    this.listarTrabajadores();
+    this.listarCargos();
+
   }
 
-  registrar() {
-    this.router.navigate(['/registro']);
-  }
-
-  /*getCliente = () => {
-    this.clienteService.getCliente().subscribe((resp: any) => {
-      this.cliente = resp;
-    });
-  }*/
-
-  getTrabajador = () => {
-    this.trabajadorService.getTrabajador().subscribe((resp: any) => {
-      this.trabajador = resp;
-      console.log(resp)
-      console.log(this.trabajador)
+  listarTrabajadores = () => {
+    this.loginService.getLogin().subscribe((resp: any) => {
+      this.trabajadores = resp;
     });
   }
 
-  getCargo = () => {
+  listarCargos = () => {
     this.cargoService.getCargo().subscribe((resp: any) => {
-      this.cargo = resp;
+      this.cargos = resp;
     });
   }
 
-  getDatosGenerales = () => {
-    this.datosGeneralesService.getDatosGenerales().subscribe((resp: any) => {
-      this.datosGenerales = resp;
+  listarDistritos = () => {
+    this.distritoService.getDistrito().subscribe((resp: any) => {
+      this.distritos = resp;
     });
   }
 
+  nuevo(){
+    this.trab = new login();
+    $('#modalNuevo').modal('show');
+  }
+
+  cargarDatos(item: any){
+    this.loginService.getLoginById(item.idLogin).subscribe((resp: any) => {
+      this.trab = Object.assign({}, resp) ;
+      $('#modalNuevo').modal('show');
+    });
+
+  }
+
+  guardar(){
+    this.loginService.postLogin(this.trab).subscribe((resp: any) => {
+      if(resp != null){
+        this.listarTrabajadores();
+        $('#modalNuevo').modal('hide');
+      }
+    });
+  }
+
+  eliminar(item: any){
+    const nombres = item.trabajador.datosGenerales.nombre + ' ' + item.trabajador.datosGenerales.apellidos;
+    if(confirm('¿Está seguro que desea eliminar al trabajador '+nombres+'?')){
+      this.loginService.deleLogin(item.idLogin).subscribe((resp: any) => {
+        this.listarTrabajadores();
+      });
+    }
+  }
 }
