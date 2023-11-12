@@ -31,46 +31,17 @@
                 </div>
               </div>
             </div>
-            <div class="mb-4 form-check">
-              <input type="checkbox" id="connected" name="connected" class="form-check-input">
-              <label for="connected" class="form-check-label">Recordar Sesión</label>
-            </div>
             <div class="d-grid">
               <button class="btn btn-primary" type="submit" [disabled]="loginForm.invalid">Ingresar</button>
             </div>
             <div class="my-3">
-              <span>¿No tienes cuenta? <a href="#">Regístrate</a></span><br>
               <span><a href="#">Recuperar Contraseña</a></span>
             </div>
-            <div class="container w-100 my-5">
-              <div class="row">
-                <div class="col">
-                  <button class="btn btn-outline-primary w-100 my-1">
-                    <div class="row align-items-center">
-                      <div class="col-2 d-none d-md-block">
-                        <img src="assets/img/fb.png" width="32" alt="">
-                      </div>
-                      <div class="col-12 col-md-10 text-center">Facebook</div>
-                    </div>
-                  </button>
-                </div>
-                <div class="col">
-                  <button class="btn btn-outline-danger w-100 my-1">
-                    <div class="row align-items-center">
-                      <div class="col-2  d-none d-md-block">
-                        <img src="assets/img/google.png" width="32" alt="">
-                      </div>
-                      <div class="col-12 col-md-10 text-center">Google</div>
-                    </div>
-                  </button>
-                </div>
-              </div>
-            </div>
+            <div *ngIf="resultado !== ''" class="alert alert-danger mt-3">{{resultado}}</div>
           </form>
         </div>
       </div>
     </div>
-    <div *ngIf="resultado !== ''" class="alert alert-danger mt-3">{{resultado}}</div>
   </div>
   
 </div>

@@ -15,7 +15,6 @@ export class ContactoComponent {
   envioExitoso: boolean = false;
 
   enviarFormulario(): void {
-
     // Simulamos un tiempo de espera de 2 segundos antes de mostrar el mensaje de envío exitoso
     setTimeout(() => {
       this.envioExitoso = true;
@@ -36,16 +35,18 @@ export class ContactoComponent {
   /******************************************************/
 
   parametros: any;
-  consultas: Iconsultas[] = [];
+  consultas: any[] = [];
   objConsultas: consultas = new consultas();
   insUpdConsultas: boolean = true;
   textoFormConsultas: string = "Enviar";
+  
+  constructor(
+    private servicioConsultas: ConsultasService) 
+    { }
 
   ngOnInit():void  {
     this.getConsultas();
-    //this.verObj();
   }
-  constructor(private servicioConsultas: ConsultasService) { }
   
   formConsultas= new FormGroup({
     nombre: new FormControl(),
