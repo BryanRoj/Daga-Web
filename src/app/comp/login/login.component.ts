@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { LoginService } from 'src/app/servicios/login.service';
+import { AlertifyService } from 'src/app/servicios/alertify.service';
+import { AuthService } from 'src/app/servicios/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +19,11 @@ export class LoginComponent{
   intentos = 0;
   bloqueado = false;
 
-  constructor(private router: Router, private http: HttpClient,private formBuilder: FormBuilder, private servicio: LoginService) {
+  constructor(private router: Router,
+     private formBuilder: FormBuilder,
+     private servicio: LoginService,
+     public auth: AuthService
+     ) {
     this.loginForm = this.formBuilder.group({
       usuario_admin: ['', Validators.required],
       pass_Admin: ['', Validators.required]
@@ -36,7 +42,7 @@ export class LoginComponent{
     this.servicio.getIniciarSesion(usuario, contraseña).subscribe(
       (response:any) => {
         if (response) {
-          console.log(response)
+
           if (response.usuario == "INCORRECT PASSWORD" ){
             this.resultado = "Contraseña incorrecta, solo cuenta con 3 intentos antes del bloqueo.";
           } else if(response.usuario == "LIMITE DE INTENTOS"){
@@ -45,9 +51,8 @@ export class LoginComponent{
 
             this.resultado = "Se ha bloqueado el login, intentelo mas tarde. " + fecha.toString();
           } else {
-            this.router.navigate(['/administrador']);
-            this.servicio.isLoggedIn = true; // Inicio de sesión exitoso
-            localStorage.setItem('usuario' ,JSON.stringify(response));
+            this.auth.setUsuario(response.trabajador);
+            window.location.href = '/home';
           }
         } else {
           // Credenciales incorrectas
@@ -55,6 +60,7 @@ export class LoginComponent{
         }
       },
       (error) => {
+        console.dir(error);
         this.resultado = "Ocurrió un error durante el inicio de sesión";
       }
     );

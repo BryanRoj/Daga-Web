@@ -49,11 +49,18 @@ export class LoginService {
     this.isLoggedIn = true; // Actualiza el valor de isLoggedIn a true
     return this.http.get<Ilogin>(url, {headers : header});
   }
-
-  cerrarSesion(): boolean {
-    this.isLoggedIn = false; // Actualiza el valor de isLoggedIn a false
-    window.location.href = '/login';
-    return false;
+  generarCodigo = (correo: string) => {
+    let header = new HttpHeaders().set('Type-content','application/json');
+    return this.http.get<any>(this.URL + '/enviar_codigo?correo=' + correo, {headers : header})
   }
 
+  validarCodigo = (codigo: string, id: number) => {
+    let header = new HttpHeaders().set('Type-content','application/json');
+    return this.http.get<any>(this.URL + '/validar_codigo?codigo=' + codigo+'&id=' + id, {headers : header})
+  }
+
+  actualizarContrasennia = (password: string, id: number) => {
+    let header = new HttpHeaders().set('Type-content','application/json');
+    return this.http.get<any>(this.URL + '/actualizar_contreasenia?password=' + password+'&id=' + id, {headers : header})
+  }
 }

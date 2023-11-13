@@ -13,25 +13,32 @@ import { FacturaComponent } from './comp/factura/factura.component';
 import { ContratoComponent } from './comp/contrato/contrato.component';
 import { ComprobanteComponent } from './comp/comprobante/comprobante.component';
 import { AdministradorComponent } from './comp/administrador/administrador.component';
+import { RecuperarPasswordComponent } from './comp/recuperar-password/recuperar-password.component';
+import { HomeComponent } from './comp/home/home.component';
+import { AdminGuard } from './guards/admin.guard';
+import { NoAuthGuard } from './guards/noauth.guard';
+import { AuthAdminSecretarioGuard } from './guards/authAdminSecretario.guard';
+import { ObreroGuard } from './guards/obrero.guard';
 
 const routes: Routes = [
   {path:"inicio",component:InicioComponent},
-  {path:"login",component:LoginComponent},
+  {path:"login",component:LoginComponent,canActivate:[NoAuthGuard]},
   {path:"contacto",component:ContactoComponent},
-  {path:"consultas",component:ConsultasComponent},
-  {path: "usuarios",component:UsuariosComponent },
-  {path: "cliente",component:ClienteComponent },
-  {path: "reportes",component:ReportesComponent},
-  {path: "presupuestos",component:PresupuestosComponent},
+  {path:"consultas",component:ConsultasComponent , canActivate:[AdminGuard]},
+  {path: "usuarios",component:UsuariosComponent , canActivate:[AdminGuard]},
+  {path: "cliente",component:ClienteComponent ,canActivate:[NoAuthGuard]},
+  {path: "reportes",component:ReportesComponent, canActivate:[ObreroGuard]},
+  {path: "presupuestos",component:PresupuestosComponent, canActivate:[AuthAdminSecretarioGuard]},
   {path: "boleta",component:BoletaComponent},
   {path: "factura",component:FacturaComponent},
-  {path: "contrato",component:ContratoComponent},
+  {path: "contrato",component:ContratoComponent, canActivate:[AuthAdminSecretarioGuard]},
   {path: "reportes",component:ReportesComponent},
-  {path: "comprobante",component:ComprobanteComponent},
-  {path: "administrador",component:AdministradorComponent}
-
+  {path: "comprobante",component:ComprobanteComponent, canActivate:[AuthAdminSecretarioGuard]},
+  {path: "administrador",component:AdministradorComponent , canActivate:[AdminGuard]},
+  {path: "recuperar",component:RecuperarPasswordComponent,canActivate:[NoAuthGuard]},
+  {path: "home",component:HomeComponent}
 ];
-  
+
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]

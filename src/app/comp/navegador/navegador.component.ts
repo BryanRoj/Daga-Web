@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { AppComponent } from 'src/app/app.component';
+import { AuthService } from 'src/app/servicios/auth.service';
 import { LoginService } from 'src/app/servicios/login.service';
 
 @Component({
@@ -6,19 +8,17 @@ import { LoginService } from 'src/app/servicios/login.service';
   templateUrl: './navegador.component.html',
   styleUrls: ['./navegador.component.css']
 })
-export class NavegadorComponent {
+export class NavegadorComponent  implements OnInit {
   usuario: any = null;
-  isLoggedIn: boolean;
-  mostrarMenuAdministrador: boolean = false; // Variable que indica si se debe mostrar el menú del administrador
-  constructor(public loginService: LoginService) {
-    this.isLoggedIn = loginService.isLoggedIn; // Obtén el valor inicial de 'isLoggedIn' del servicio de inicio de sesión
+   constructor( public auth: AuthService) {
 
-    var datos = localStorage.getItem('usuario');
-    if(localStorage.getItem('usuario') != null){
-      this.usuario = JSON.parse(datos!);
-      console.dir('DATOS LOGEADO');
-      console.dir(this.usuario);
-    }
+  }
+  ngOnInit(): void {
+    this.usuario = this.auth.getUsuario();
+  }
 
+  salir(){
+    this.auth.removerLogin();
+    window.location.href = '/login';
   }
 }

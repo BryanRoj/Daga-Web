@@ -35,13 +35,13 @@
               <button class="btn btn-primary" type="submit" [disabled]="loginForm.invalid">Ingresar</button>
             </div>
             <div class="my-3">
-              <span><a href="#">Recuperar Contraseña</a></span>
+              <span><a [routerLink]="['/recuperar']">Recuperar Contraseña</a></span>
             </div>
-            <div *ngIf="resultado !== ''" class="alert alert-danger mt-3">{{resultado}}</div>
+            <div *ngIf="resultado !== '' && resultado != undefined" class="alert alert-danger mt-3">{{resultado}}</div>
           </form>
         </div>
       </div>
     </div>
   </div>
-  
+
 </div>

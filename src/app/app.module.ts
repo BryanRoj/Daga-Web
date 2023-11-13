@@ -9,7 +9,6 @@ import { LoginComponent } from './comp/login/login.component';
 import { ContactoComponent } from './comp/contacto/contacto.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NavegadorAdministradorComponent } from './comp/navegador-administrador/navegador-administrador.component';
 import { BusquedaProductosPipe } from './pipes/busqueda-productos.pipe';
 import { BusquedaUsuariosPipe } from './pipes/busqueda-usuarios.pipe';
 import { UsuariosComponent } from './comp/usuarios/usuarios.component';
@@ -28,6 +27,8 @@ import { FacturaComponent } from './comp/factura/factura.component';
 import { ContratoComponent } from './comp/contrato/contrato.component';
 import { ComprobanteComponent } from './comp/comprobante/comprobante.component';
 import { AdministradorComponent } from './comp/administrador/administrador.component';
+import { RecuperarPasswordComponent } from './comp/recuperar-password/recuperar-password.component';
+import { HomeComponent } from './comp/home/home.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,6 @@ import { AdministradorComponent } from './comp/administrador/administrador.compo
     InicioComponent,
     LoginComponent,
     ContactoComponent,
-    NavegadorAdministradorComponent,
     BusquedaProductosPipe,
     BusquedaUsuariosPipe,
     UsuariosComponent,
@@ -48,7 +48,9 @@ import { AdministradorComponent } from './comp/administrador/administrador.compo
     FacturaComponent,
     ContratoComponent,
     ComprobanteComponent,
-    AdministradorComponent
+    AdministradorComponent,
+    RecuperarPasswordComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
