@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -13,11 +14,18 @@ export class AppComponent implements OnInit {
 
   mostrarMenuAdministrador = true;
 
-  constructor( ) {
+  constructor( private http: HttpClient) {
 
   }
 
   ngOnInit(): void {
+    /*this.http.get('http://localhost:8080',{ 
+    //this.http.get('https://spring-271023.ue.r.appspot.com/', {
+      withCredentials: true
+    })
+      .subscribe(response => {
+        // ...
+      });*/
    }
 
 }
