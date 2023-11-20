@@ -7,7 +7,7 @@ import { NavegadorComponent } from './comp/navegador/navegador.component';
 import { InicioComponent } from './comp/inicio/inicio.component';
 import { LoginComponent } from './comp/login/login.component';
 import { ContactoComponent } from './comp/contacto/contacto.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BusquedaProductosPipe } from './pipes/busqueda-productos.pipe';
 import { BusquedaUsuariosPipe } from './pipes/busqueda-usuarios.pipe';
@@ -29,6 +29,8 @@ import { ComprobanteComponent } from './comp/comprobante/comprobante.component';
 import { AdministradorComponent } from './comp/administrador/administrador.component';
 import { RecuperarPasswordComponent } from './comp/recuperar-password/recuperar-password.component';
 import { HomeComponent } from './comp/home/home.component';
+import { TokenInterceptorService } from './interceptor/token.interceptor.service';
+import { AuthInterceptorService } from './interceptor/auth.interceptor.service';
 
 @NgModule({
   declarations: [
@@ -65,7 +67,18 @@ import { HomeComponent } from './comp/home/home.component';
     provideDatabase(() => getDatabase()),
     provideFirestore(() => getFirestore())
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS ,
+      useClass:AuthInterceptorService ,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS ,
+      useClass:TokenInterceptorService ,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

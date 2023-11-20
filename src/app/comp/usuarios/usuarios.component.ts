@@ -30,6 +30,10 @@ export class UsuariosComponent implements OnInit {
 
   }
 
+  cargarCargos(){
+    this.listarCargos();
+  }
+
   listarTrabajadores = () => {
     this.loginService.getLogin().subscribe((resp: any) => {
       this.trabajadores = resp;

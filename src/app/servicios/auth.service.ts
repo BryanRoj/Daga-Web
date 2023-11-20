@@ -31,7 +31,6 @@ export class AuthService {
   getCargo(){
     let usuario = this.getUsuario();
     if(usuario != null){
-      console.dir(usuario);
       if(usuario.cargo != null){
         return usuario.cargo.idCargo;
       }
@@ -50,8 +49,29 @@ export class AuthService {
   }
 
   removerLogin(){
+    localStorage.removeItem('expira');
+    localStorage.removeItem('token');
     localStorage.removeItem('usuario');
-
     return false;
   }
+
+  setToken(token:any){
+    localStorage.setItem('token',token);
+  }
+  setExpira(expira:any){
+    localStorage.setItem('expira',expira);
+  }
+
+  getToken(){
+    return localStorage.getItem('token');
+  }
+
+  validarExpiracionToken(){
+    if (localStorage.getItem('expira') == null) {
+      return false;
+    }
+    const expiracion = new Date(localStorage.getItem('expira')!);
+    return (expiracion > new Date());
+  }
+
 }

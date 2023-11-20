@@ -17,8 +17,8 @@ export class DistritoService {
   }
 //Listado
   getDistrito = () => {
-    let header = new HttpHeaders().set('Type-content','application/json');
-    return this.http.get(this.URL, {headers : header})
+    //let header = new HttpHeaders().set('Type-content','application/json');
+    return this.http.get(this.URL);
   }
 
   postDistrito = (data:Idistrito) => {
