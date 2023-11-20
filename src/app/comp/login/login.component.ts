@@ -42,16 +42,16 @@ export class LoginComponent{
     this.servicio.getIniciarSesion(usuario, contraseña).subscribe(
       (response:any) => {
         if (response) {
-
           if (response.usuario == "INCORRECT PASSWORD" ){
             this.resultado = "Contraseña incorrecta, solo cuenta con 3 intentos antes del bloqueo.";
           } else if(response.usuario == "LIMITE DE INTENTOS"){
-            const fechaAhora = new Date().getTime();
             const fecha = new Date(response.tiempoBloqueo);
 
             this.resultado = "Se ha bloqueado el login, intentelo mas tarde. " + fecha.toString();
           } else {
-            this.auth.setUsuario(response.trabajador);
+            this.auth.setUsuario(response.usuario.trabajador);
+            this.auth.setToken(response.token);
+            this.auth.setExpira(response.expiracion);
             window.location.href = '/home';
           }
         } else {

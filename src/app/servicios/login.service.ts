@@ -19,13 +19,13 @@ export class LoginService {
   }
 //Listado
   getLogin = () => {
-    let header = new HttpHeaders().set('Type-content','application/json');
-    return this.http.get<login[]>(this.URL, {headers : header})
+ //   let header = new HttpHeaders().set('Type-content','application/json');
+    return this.http.get<login[]>(this.URL)
   }
 
   getLoginById = (id: number) => {
     let header = new HttpHeaders().set('Type-content','application/json');
-    return this.http.get<login>(this.URL + '/' + id, {headers : header})
+    return this.http.get<login>(this.URL + '/' + id)
   }
 
   postLogin = (data:any) => {
@@ -43,12 +43,20 @@ export class LoginService {
     .pipe(map((emp)=>data)); // importar de rxjs
   }
 
-  getIniciarSesion = (usuario: string, contrasena: string): Observable<Ilogin> => {
+  getIniciarSesionGET = (usuario: string, contrasena: string): Observable<Ilogin> => {
     let header = new HttpHeaders().set('Type-content','application/json');
     const url = `${this.URL}/login/${usuario}+${contrasena}`
     this.isLoggedIn = true; // Actualiza el valor de isLoggedIn a true
     return this.http.get<Ilogin>(url, {headers : header});
   }
+
+  getIniciarSesion = (usuario: string, contrasena: string): Observable<any> => {
+    let header = new HttpHeaders().set('Type-content','application/json');
+    const url = `${this.URL}/login/${usuario}+${contrasena}`
+    this.isLoggedIn = true; // Actualiza el valor de isLoggedIn a true
+    return this.http.get<any>(url, {headers : header});
+  }
+
   generarCodigo = (correo: string) => {
     let header = new HttpHeaders().set('Type-content','application/json');
     return this.http.get<any>(this.URL + '/enviar_codigo?correo=' + correo, {headers : header})
