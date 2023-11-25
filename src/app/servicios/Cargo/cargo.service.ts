@@ -1,8 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Icargo } from '../modelo/Cargo/Icargo';
+import { Icargo } from 'src/app/modelo/Cargo/Icargo';
 import { map } from 'rxjs';
-import { GlobalService } from './globalService';
+import { GlobalService } from '../globalService';
 
 @Injectable({
   providedIn: 'root'

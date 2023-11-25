@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { AlertifyService } from 'src/app/servicios/alertify.service';
-import { LoginService } from 'src/app/servicios/login.service';
+import { AlertifyService } from 'src/app/servicios/Alertify/alertify.service';
+import { LoginService } from 'src/app/servicios/Login/login.service';
 
 @Component({
   selector: 'app-recuperar-password',

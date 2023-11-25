@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Idistrito } from '../modelo/Distrito/Idistrito';
+import { Idistrito } from 'src/app/modelo/Distrito/Idistrito';
 import { map } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { GlobalService } from './globalService';
+import { GlobalService } from '../globalService';
 
 @Injectable({
   providedIn: 'root'

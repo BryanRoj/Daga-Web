@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { IdatosGenerales } from '../modelo/DatosGenerales/IdatosGenerales';
+import { IdatosGenerales } from '../../modelo/DatosGenerales/IdatosGenerales';
 import { map } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { GlobalService } from './globalService';
+import { GlobalService } from '../globalService';
 
 @Injectable({
   providedIn: 'root'

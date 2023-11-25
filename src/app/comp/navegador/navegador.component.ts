@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AppComponent } from 'src/app/app.component';
-import { AuthService } from 'src/app/servicios/auth.service';
-import { LoginService } from 'src/app/servicios/login.service';
+import { AuthService } from 'src/app/servicios/Auth/auth.service';
+import { LoginService } from 'src/app/servicios/Login/login.service';
 
 @Component({
   selector: 'app-navegador',

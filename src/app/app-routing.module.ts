@@ -12,7 +12,6 @@ import { BoletaComponent } from './comp/boleta/boleta.component';
 import { FacturaComponent } from './comp/factura/factura.component';
 import { ContratoComponent } from './comp/contrato/contrato.component';
 import { ComprobanteComponent } from './comp/comprobante/comprobante.component';
-import { AdministradorComponent } from './comp/administrador/administrador.component';
 import { RecuperarPasswordComponent } from './comp/recuperar-password/recuperar-password.component';
 import { HomeComponent } from './comp/home/home.component';
 import { AdminGuard } from './guards/admin.guard';
@@ -34,7 +33,6 @@ const routes: Routes = [
   {path: "contrato",component:ContratoComponent, canActivate:[AuthAdminSecretarioGuard]},
   {path: "reportes",component:ReportesComponent},
   {path: "comprobante",component:ComprobanteComponent, canActivate:[AuthAdminSecretarioGuard]},
-  {path: "administrador",component:AdministradorComponent , canActivate:[AdminGuard]},
   {path: "recuperar",component:RecuperarPasswordComponent,canActivate:[NoAuthGuard]},
   {path: "home",component:HomeComponent}
 ];

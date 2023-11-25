@@ -26,11 +26,11 @@ import { BoletaComponent } from './comp/boleta/boleta.component';
 import { FacturaComponent } from './comp/factura/factura.component';
 import { ContratoComponent } from './comp/contrato/contrato.component';
 import { ComprobanteComponent } from './comp/comprobante/comprobante.component';
-import { AdministradorComponent } from './comp/administrador/administrador.component';
 import { RecuperarPasswordComponent } from './comp/recuperar-password/recuperar-password.component';
 import { HomeComponent } from './comp/home/home.component';
 import { TokenInterceptorService } from './interceptor/token.interceptor.service';
 import { AuthInterceptorService } from './interceptor/auth.interceptor.service';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -50,13 +50,13 @@ import { AuthInterceptorService } from './interceptor/auth.interceptor.service';
     FacturaComponent,
     ContratoComponent,
     ComprobanteComponent,
-    AdministradorComponent,
     RecuperarPasswordComponent,
     HomeComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    RouterModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,

@@ -1,8 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Itrabajador } from '../modelo/Trabajador/Itrabajador';
+import { Itrabajador } from 'src/app/modelo/Trabajador/Itrabajador';
 import { map } from 'rxjs';
-import { GlobalService } from './globalService';
+import { GlobalService } from '../globalService';
 
 @Injectable({
   providedIn: 'root'

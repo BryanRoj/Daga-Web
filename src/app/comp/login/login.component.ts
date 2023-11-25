@@ -2,9 +2,9 @@ import { Component, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import { LoginService } from 'src/app/servicios/login.service';
-import { AlertifyService } from 'src/app/servicios/alertify.service';
-import { AuthService } from 'src/app/servicios/auth.service';
+import { LoginService } from 'src/app/servicios/Login/login.service';
+import { AlertifyService } from 'src/app/servicios/Alertify/alertify.service';
+import { AuthService } from 'src/app/servicios/Auth/auth.service';
 
 @Component({
   selector: 'app-login',

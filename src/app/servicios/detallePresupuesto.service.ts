@@ -1,38 +1,38 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Ipresupuesto } from '../modelo/Presupuesto/Ipresupuesto';
+import { IdetallePresupuesto } from '../modelo/DetallePresupuesto/IdetallePresupuesto';
 import { map } from 'rxjs';
 import { GlobalService } from './globalService';
 
 @Injectable({
   providedIn: 'root'
 })
-export class PresupuestoService {
+export class DetallePresupuestoService {
   
-  URL:string = "/presupuestoDaga";
+  URL:string = "/detallePresupuestoDaga";
   apiUrl: any;
 
   constructor(private http:HttpClient, private globalService:GlobalService) {
     this.URL = this.globalService.getUrl() + this.URL;
   }
 //Listado
-  getPresupuesto = () => {
+  getDetallePresupuesto = () => {
     let header = new HttpHeaders().set('Type-content','application/json');
     return this.http.get(this.URL, {headers : header})
   }
 
-  postPresupuesto = (data:Ipresupuesto) => {
-    return this.http.post<Ipresupuesto>(this.URL,data)
+  postDetallePresupuesto = (data:IdetallePresupuesto) => {
+    return this.http.post<IdetallePresupuesto>(this.URL,data)
     .pipe(map((emp)=>data)); // importar de rxjs
   }
 
-  delePresupuesto = (id:number) => {
-    return this.http.delete<Ipresupuesto>(`${this.URL}/${id}`)
+  deleDetallePresupuesto = (id:number) => {
+    return this.http.delete<IdetallePresupuesto>(`${this.URL}/${id}`)
     .pipe(map((emp)=>id));
   }
 
-  putPresupuesto = (data:Ipresupuesto) => {
-    return this.http.put<Ipresupuesto>(this.URL,data)
+  putDetallePresupuesto = (data:IdetallePresupuesto) => {
+    return this.http.put<IdetallePresupuesto>(this.URL,data)
     .pipe(map((emp)=>data)); // importar de rxjs
   }
 }

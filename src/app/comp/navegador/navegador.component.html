@@ -1,47 +1,48 @@
 <nav class="navbar navbar-expand-lg navbar-dark" style="background: #000;">
-  <div class="container">
-    <a class="navbar-brand" routerLink="inicio"><img src="assets/img/logo_daga.png" alt="logo"></a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu" aria-controls="navbarMenu" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarMenu">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/inicio"  *ngIf="usuario == null"><h3>Inicio</h3></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/contacto"  *ngIf="usuario == null"><h3>Contacto</h3></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/login" *ngIf="usuario == null"><h3>Login</h3></a>
-          </li>
-
-
-          <li class="nav-item dropdown"  *ngIf="usuario != null && (auth.esCargoAdmin() || auth.esCargoSecretario())">
-            <a class="nav-link dropdown-toggle menu-link" routerLink="#" id="navbarScrollingDropdown" role="button"
-                data-bs-toggle="dropdown" aria-expanded="false">
-                <h3>Emitir</h3>
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown"
-            >
-                <li><a class="dropdown-item menu-link" routerLink="presupuestos">Presupuesto</a></li>
-                <li><a class="dropdown-item menu-link" routerLink="contrato" >Contrato</a></li>
-                <li><a class="dropdown-item menu-link" routerLink="comprobante" >Comprobante</a></li>
-            </ul>
-          </li>
-          <li class="nav-item" *ngIf="usuario != null && auth.esCargoObrero()">
-            <a class="nav-link" routerLink="reportes" ><h3>Reporte</h3></a>
-          </li>
-          <li class="nav-item" *ngIf="usuario != null && auth.esCargoAdmin()">
-            <a class="nav-link" routerLink="consultas"><h3>Consultas</h3></a>
-          </li>
-          <li class="nav-item" *ngIf="usuario != null && auth.esCargoAdmin()">
-            <a class="nav-link" routerLink="usuarios" ><h3>Usuarios</h3></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="inicio" (click)="salir()" *ngIf="usuario != null"><h3>Salir</h3></a>
-          </li>
-        </ul>
+    <div class="container">
+      <a class="navbar-brand" routerLink="inicio"><img src="assets/img/logo_daga.png" alt="logo"></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu" aria-controls="navbarMenu" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarMenu">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/inicio"  *ngIf="usuario == null"><h3>Inicio</h3></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/contacto"  *ngIf="usuario == null"><h3>Contacto</h3></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/login" *ngIf="usuario == null"><h3>Login</h3></a>
+            </li>
+  
+  
+            <li class="nav-item dropdown"  *ngIf="usuario != null && (auth.esCargoAdmin() || auth.esCargoSecretario())">
+              <a class="nav-link dropdown-toggle menu-link" routerLink="#" id="navbarScrollingDropdown" role="button"
+                  data-bs-toggle="dropdown" aria-expanded="false">
+                  <h3>Emitir</h3>
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown"
+              >
+                  <li><a class="dropdown-item menu-link" routerLink="presupuestos">Presupuesto</a></li>
+                  <li><a class="dropdown-item menu-link" routerLink="contrato" >Contrato</a></li>
+                  <li><a class="dropdown-item menu-link" routerLink="comprobante" >Comprobante</a></li>
+              </ul>
+            </li>
+            <li class="nav-item" *ngIf="usuario != null && auth.esCargoObrero()">
+              <a class="nav-link" routerLink="reportes" ><h3>Reporte</h3></a>
+            </li>
+            <li class="nav-item" *ngIf="usuario != null && auth.esCargoAdmin()">
+              <a class="nav-link" routerLink="consultas"><h3>Consultas</h3></a>
+            </li>
+            <li class="nav-item" *ngIf="usuario != null && auth.esCargoAdmin()">
+              <a class="nav-link" routerLink="usuarios" ><h3>Usuarios</h3></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="inicio" (click)="salir()" *ngIf="usuario != null"><h3>Salir</h3></a>
+            </li>
+          </ul>
+      </div>
     </div>
-  </div>
-</nav>
+  </nav>
+  

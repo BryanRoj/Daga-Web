@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { login } from 'src/app/modelo/Login/login';
-import { CargoService } from 'src/app/servicios/cargo.service';
-import { DistritoService } from 'src/app/servicios/distrito.Service';
-import { LoginService } from 'src/app/servicios/login.service';
+import { CargoService } from 'src/app/servicios//Cargo/cargo.service';
+import { DistritoService } from 'src/app/servicios/Distritos/distrito.service';
+import { LoginService } from 'src/app/servicios/Login/login.service';
 
 declare var $: any;
 
